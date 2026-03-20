@@ -1,13 +1,15 @@
 package src.model;
 
-public class storeItem {
+public class StoreItem 
+{
     private int storeId;
     private int itemId;
     private boolean inStock;
     private double price;
     private String aisle;
 
-    public storeItem(int storeId, int itemId, boolean inStock, double price, String aisle) {
+    public storeItem(int storeId, int itemId, boolean inStock, double price, String aisle) 
+    {
         this.storeId = storeId;
         this.itemId = itemId;
         this.inStock = inStock;

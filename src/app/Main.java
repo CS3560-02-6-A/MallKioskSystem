@@ -1,5 +1,6 @@
 package src.app;
 
-public class main {
+public class Main 
+{
     
 }
