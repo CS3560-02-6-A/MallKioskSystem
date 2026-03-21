@@ -102,13 +102,6 @@
             <mxPoint x="610" y="1380" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="z9lI8l1U3VSB73Tm96oR-1" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" value="confirm addition of Item to cart">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint as="offset" />
-            <mxPoint x="610.0000000000002" y="499.9999999999998" as="sourcePoint" />
-            <mxPoint x="170.00000000000023" y="499.9999999999998" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="z9lI8l1U3VSB73Tm96oR-2" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" value="AddToCart(Item)">
           <mxGeometry relative="1" width="80" as="geometry">
             <mxPoint x="170.00000000000023" y="469.9999999999998" as="sourcePoint" />
@@ -120,13 +113,6 @@
         </mxCell>
         <mxCell id="z9lI8l1U3VSB73Tm96oR-4" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="[Customer chooses to AddToCart]" vertex="1">
           <mxGeometry height="30" width="190" x="170.00000000000023" y="419.9999999999998" as="geometry" />
-        </mxCell>
-        <mxCell id="z9lI8l1U3VSB73Tm96oR-5" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" value="confirm removal of Item from cart">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint as="offset" />
-            <mxPoint x="610.0000000000002" y="639.9999999999998" as="sourcePoint" />
-            <mxPoint x="170.00000000000023" y="639.9999999999998" as="targetPoint" />
-          </mxGeometry>
         </mxCell>
         <mxCell id="z9lI8l1U3VSB73Tm96oR-6" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" value="RemoveFromCart(Item)">
           <mxGeometry relative="1" width="80" as="geometry">
