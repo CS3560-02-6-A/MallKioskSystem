@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Raleway:ital,wght@0,300;0,400;0,700;1,300&display=swap");
+
+/* Reset everything */
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* kiosk: no scrolling */
+}
+
+/* Prevent weird overflow issues */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

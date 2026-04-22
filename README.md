@@ -6,10 +6,30 @@ Here are some ideas that our mall kiosk can do (tentative):
 * Print out kiosk "receipt", including: itemID and item names, store locations (floor and suite number), prices of individual items, total cost. 
 
 
-# Teammates 
+## Teammates 
 1. Shuvashree Basnet
-2. Jeanette Ruiz
+2. Jeannette Ruiz
 3. Brooke Landry
 4. Anthony Corona
 5. Thuy An Nguyen
 6. Chau Nguyen
+
+
+## Features
+List them here..
+
+
+### Built With
+
+Description Here. Edit this later...
+
+* [![Next][Next.js]][Next-url]
+* [![React][React.js]][React-url]
+* [![Vue][Vue.js]][Vue-url]
+* [![Angular][Angular.io]][Angular-url]
+* [![Svelte][Svelte.dev]][Svelte-url]
+* [![Laravel][Laravel.com]][Laravel-url]
+* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+* [![JQuery][JQuery.com]][JQuery-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
