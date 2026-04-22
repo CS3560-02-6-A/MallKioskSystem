@@ -8,7 +8,7 @@ public class StoreItem
     private double price;
     private String aisle;
 
-    public storeItem(int storeId, int itemId, boolean inStock, double price, String aisle) 
+    public StoreItem(int storeId, int itemId, boolean inStock, double price, String aisle) 
     {
         this.storeId = storeId;
         this.itemId = itemId;

@@ -1,3 +1,5 @@
+package src.model;
+
 public class StoreManager {
 	private int StoreID;
 	private int managerNumber; //The ID is first StoreID, and then managerNumber.

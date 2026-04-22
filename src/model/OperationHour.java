@@ -1,35 +1,39 @@
+package src.model;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
+
 
 public class OperationHour
 {
     //INSTANCE VARIBLES
-    private Map storeHoursList;
+    private Map<String, String> storeHoursList;
 
     //CONSTRUCTOR
-    public OpeningHour
+    public OperationHour()
     {
-        Map<String, String> storeHoursList = new HashMap<>();
+        this.storeHoursList = new HashMap<>();
     }
 
     //INSTANCE METHODS
-    public addDateHour(DateHour givenDateHour)
+    public void addDateHour(DateHour givenDateHour)
     {
         storeHoursList.put(givenDateHour.getDayOfWeek(), givenDateHour.getTime());
     }
 
-    public addAListOfDataHour(List listDateHour)
+    public void addAListOfDataHour(List<DateHour> listDateHour)
     {
         for(DateHour e: listDateHour)
         {
-            storeHourList.put(e.getDayOfWeek(), givenDateHour.getTime());
+            storeHoursList.put(e.getDayOfWeek(), e.getTime());
         }
     }
 
     public String printOperationHour()
     {
-        return 
+        return storeHoursList.toString();
     }
 
-
-}
+};
+    

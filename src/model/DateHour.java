@@ -1,3 +1,5 @@
+package src.model;
+
 public class DateHour
 {
     //INSTANCE VARIABLES
@@ -26,7 +28,7 @@ public class DateHour
     {
         this.dayOfWeek = day;
     }
-    pubic void setTime(String time) //ex: 10am-12pm
+    public void setTime(String time) //ex: 10am-12pm
     {
         this.time = time;
     }

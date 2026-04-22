@@ -31,10 +31,12 @@ public class Item {
     {
         this.name = given_name;
     }
+
     public void setItemType(String given_type)
     {
-        this.type = given_type
+        this.type = given_type;
     }
+
     public void setItemColor(String given_color)
     {
         this.color = given_color;

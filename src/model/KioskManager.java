@@ -1,3 +1,5 @@
+package src.model;
+
 public class KioskManager {
 	private int identifier; //also called ID
 	//public:

@@ -6,15 +6,15 @@ public class Store
     private int id;
     private String name;
     private String telephone;
-    private Map operationHour;
+    private OperationHour hours;
 
     //CONSTRUCTOR 
-    public Store(int id, String name, String telephone, Map operationHour) 
+    public Store(int id, String name, String telephone, OperationHour hours) 
     {
         this.id = id;
         this.name = name;
         this.telephone = telephone;
-        this.operationHour = openingHour;
+        this.hours = hours;
 
     }
 
@@ -22,7 +22,6 @@ public class Store
     public int getStoreID() { return this.id; }
     public String getStoreName() { return this.name; }
     public String getStoreTelephone() { return this.telephone; }
-    public 
 
 
     //SETTER
@@ -30,7 +29,7 @@ public class Store
     {
         this.id = id;
     }
-    public void getStoreName(String name)
+    public void setStoreName(String name)
     { 
         this.name = name; 
     }
