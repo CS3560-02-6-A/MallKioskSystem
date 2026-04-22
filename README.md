@@ -121,3 +121,15 @@ Content
 GitHub Repository: (https://github.com/CS3560-02-6-A)
 Figma Designs: (https://www.figma.com/design/Dr3BZ3X85Rt1dMO2MRGL7A/CS3560_OutfitCurator?node-id=0-1&t=eSrnbFsuRPcvZAU2-1)
 
+
+
+NOTES FOR RUNNING ON PC:
+1. Start MySQL
+2. Create database:
+   CREATE DATABASE mall_kiosk_system;
+
+3. Import schema and change user/password values in dao/databaseConnection:
+   mysql -u root -p mall_kiosk_system < database/schema.sql
+
+4. (Optional) Import data:
+   mysql -u root -p mall_kiosk_system < database/fullKioskTableData.sql
