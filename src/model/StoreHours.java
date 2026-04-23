@@ -1,15 +1,21 @@
 package src.model;
 public class StoreHours {
-	private int hoursId;
+	private int hoursID;
 	private int storeID;
 	private String dayOfWeek;
 	private Time openTime;
 	private Time closeTime;
-	public StoreHours(int storeID, String dayOfWeek, Time openTime, Time closeTime) {
+	public StoreHours(int hoursID, int storeID, String dayOfWeek, Time openTime, Time closeTime) {
 		setStoreID(storeID);
 		setDayOfWeek(dayOfWeek);
 		setOpenTime(openTime);
 		setCloseTime(closeTime);
+	}
+	public void setHoursID(int hoursID) {
+		//We must make sure that this hours ID is not the same
+		//as any other hours ID connected to a particular store.
+		//Where may I find a function to check for this?
+		this.hoursID = hoursID;
 	}
 	public void setStoreID(int storeID) {
 		//We must make sure that this store ID is not the same
@@ -38,6 +44,9 @@ public class StoreHours {
 	}
 	public void setCloseTime(Time closeTime) {
 		this.closeTime = closeTime;
+	}
+	public int getHoursID() {
+		return hoursID;
 	}
 	public int getStoreID() {
 		return storeID;
