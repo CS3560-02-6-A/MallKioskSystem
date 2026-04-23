@@ -13,7 +13,7 @@ const palette = {
 
 export const theme = {
   colors: {
-    page: palette.palePink,
+    page: palette.offWhite,
     text: palette.darkBrown,
     mutedText: palette.darkBrown,
     link: palette.darkBrown,
@@ -21,6 +21,7 @@ export const theme = {
     primaryStroke: palette.primaryStroke,
     white: palette.white,
     tan: palette.tan,
+    lightBrown: palette.lightBrown,
   },
 
   fonts: {
