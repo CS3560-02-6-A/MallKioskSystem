@@ -20,6 +20,7 @@ export const theme = {
     primaryGradient: `linear-gradient(180deg, ${palette.primaryTop} 0%, ${palette.primaryBottom} 100%)`,
     primaryStroke: palette.primaryStroke,
     white: palette.white,
+    tan: palette.tan,
   },
 
   fonts: {
