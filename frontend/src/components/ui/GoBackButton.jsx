@@ -13,7 +13,7 @@ export default function GoBackButton({ children, style = {}, ...props }) {
         height: "clamp(56px, 5vw, 66px)",
         padding: "0 clamp(22px, 2vw, 28px)",
         borderRadius: theme.radius.pill,
-        border: `2px solid ${theme.colors.text}`,
+        border: `2px solid ${theme.colors.lightBrown}`,
         background: theme.colors.tan,
         color: theme.colors.text,
         fontFamily: theme.fonts.sans,

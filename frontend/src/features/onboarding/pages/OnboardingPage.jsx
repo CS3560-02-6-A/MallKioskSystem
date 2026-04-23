@@ -1,9 +1,16 @@
+import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import AppButton from "../../../components/ui/AppButton";
+import InputPage from "./InputPage";
 import { theme } from "../../../styles/theme";
 import sketchImage from "../../../assets/images/img_sketch.png";
 
 export default function OnboardingPage() {
+  const [showInputPage, setShowInputPage] = useState(false);
+  if (showInputPage) {
+    return <InputPage setShowInputPage={setShowInputPage} />;
+  }
+
   return (
     <main
       style={{
@@ -111,7 +118,10 @@ export default function OnboardingPage() {
               alignItems: "center",
             }}
           >
-            <AppButton rightIcon={<ArrowRight size={22} strokeWidth={2.8} />}>
+            <AppButton
+              onClick={() => setShowInputPage(true)}
+              rightIcon={<ArrowRight size={22} strokeWidth={2.8} />}
+            >
               Get started
             </AppButton>
 
