@@ -1,5 +1,6 @@
 import { theme } from "../../../styles/theme";
 import HeaderBar from "../../../components/ui/HeaderBar";
+import ProgressBar from "../../../components/ui/ProgressBar";
 
 export default function InputPage({ setShowInputPage }) {
   return (
@@ -14,7 +15,7 @@ export default function InputPage({ setShowInputPage }) {
     }}
 >
         <HeaderBar leftButton={"Change fit ←"} > 
-            <text> Progress Bar</text>
+            <ProgressBar/>
         </HeaderBar>
     </main>
     );
