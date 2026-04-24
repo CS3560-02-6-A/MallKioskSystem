@@ -1,8 +1,15 @@
 import { theme } from "../../styles/theme";
 
-export default function AppButton({ children, rightIcon, style = {}, ...props }) {
+export default function AppButton({
+  children,
+  rightIcon,
+  disabled = false,
+  style = {},
+  ...props
+}) {
   return (
     <button
+      disabled={disabled}
       {...props}
       style={{
         display: "inline-flex",
@@ -13,16 +20,17 @@ export default function AppButton({ children, rightIcon, style = {}, ...props })
         height: "clamp(56px, 5vw, 66px)",
         padding: "0 clamp(22px, 2vw, 28px)",
         borderRadius: theme.radius.pill,
-        border: `2px solid ${theme.colors.primaryStroke}`,
-        background: theme.colors.primaryGradient,
+        border: theme.colors.primaryStroke,
+        background: disabled ? "#898989" : theme.colors.primaryGradient,
         boxShadow: theme.shadows.primaryButton,
-        color: theme.colors.white,
+        color: disabled ? "#F6F6F6" : theme.colors.white,
         fontFamily: theme.fonts.sans,
         fontSize: theme.fontSizes.cta,
         fontWeight: theme.fontWeights.bold,
         letterSpacing: "-0.02em",
-        cursor: "pointer",
+        cursor: disabled ? "not-allowed" : "pointer",
         whiteSpace: "nowrap",
+        opacity: disabled ? 0.85 : 1,
         ...style,
       }}
     >
