@@ -1,5 +1,9 @@
 import { theme } from "../../../styles/theme";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import HeaderBar from "../../../components/ui/HeaderBar";
+import ProgressBar from "../../../components/ui/ProgressBar";
+import AppButton from "../../../components/ui/AppButton";
 import OccasionPage from "../../outfit-curator/pages/OccasionPage.jsx";
 import GoBackButton from "../../../components/ui/GoBackButton";
 import EndSessionButton from "../../../components/ui/EndSessionButton";
@@ -9,10 +13,10 @@ import neutralImage from "../../../assets/images/neutral.png";
 import neutralImageSelected from "../../../assets/images/neutralSelected.png";
 import manImage from "../../../assets/images/man.png";
 import manImageSelected from "../../../assets/images/manSelected.png";
-import AppButton from "../../../components/ui/AppButton";
 
+export default function InputPage({ setShowInputPage }) {
+    const navigate = useNavigate();
 
-export default function InputPage({ setShowInputPage }) {  
   return (
     <main
     style={{
@@ -135,6 +139,13 @@ export default function InputPage({ setShowInputPage }) {
                 Continue
             </AppButton>
             </section>
+        <HeaderBar leftButton={"Change fit ←"} > 
+            <ProgressBar/>
+        </HeaderBar>
+        <AppButton               
+        >
+             Continue 
+    </AppButton>
     </main>
     );
 }
