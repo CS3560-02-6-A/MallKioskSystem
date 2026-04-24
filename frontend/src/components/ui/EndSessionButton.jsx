@@ -1,10 +1,16 @@
 import { theme } from "../../styles/theme";
 
 export default function EndSessionButton({ style = {}, ...props }) {
+  const handleEndSession = () => {
+    localStorage.clear();
+    window.location.assign("/onboarding");
+  };
+
   //OnClick -- Clear local storage, redirect to home page
   return (
     <button
       {...props}
+      onClick={handleEndSession}
       style={{
         display: "inline-flex",
         alignItems: "center",
