@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
-import {useNavigate} from "react-router-dom";
 import AppButton from "../../../components/ui/AppButton";
 import InputPage from "./InputPage";
 import { theme } from "../../../styles/theme";
-
+import manImage from "../../../assets/images/man.png";
+import manImageSelected from "../../../assets/images/manSelected.png";
+import womanImage from "../../../assets/images/woman.png";
+import womanImageSelected from "../../../assets/images/womanSelected.png";
+import neutralImage from "../../../assets/images/neutral.png";
+import neutralImageSelected from "../../../assets/images/neutralSelected.png";
 
 function selectMan(){ /*changes the man image button to the selected man image button, and deselects any other selected image button*/
     return (
@@ -132,7 +136,7 @@ function selectNeutral(){ /*changes the neutral image button to the selected neu
         </div>
     )
 }
-export default function GenderPage(){ /*headers, unselected gender images, and continue button => OccasionPage*/
+export default function GenderPage(setShowGenderPage){ /*headers, unselected gender images, and continue button => OccasionPage*/
     return(
         <section> 
             <div>
@@ -189,7 +193,6 @@ export default function GenderPage(){ /*headers, unselected gender images, and c
                 />
             </div>
             <AppButton>
-                onClick={() => useNavigate("/OccasionPage")}
                 rightIcon={<ArrowRight size={22} strokeWidth={2.8} />}
             </AppButton>
         </section>

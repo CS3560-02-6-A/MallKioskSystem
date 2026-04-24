@@ -131,8 +131,7 @@ export default function InputPage({ setShowInputPage }) {
                     display: "flex",
                 }}
             >
-            <AppButton 
-              onClick={() => setShowOccasionPage(true)}>
+            <AppButton>
                 Continue
             </AppButton>
             </section>
