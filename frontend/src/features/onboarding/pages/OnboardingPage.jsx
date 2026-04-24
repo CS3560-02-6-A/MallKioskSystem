@@ -1,15 +1,11 @@
-import { useState } from "react";
 import { ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import AppButton from "../../../components/ui/AppButton";
-import InputPage from "./InputPage";
 import { theme } from "../../../styles/theme";
 import sketchImage from "../../../assets/images/img_sketch.png";
 
 export default function OnboardingPage() {
-  const [showInputPage, setShowInputPage] = useState(false);
-  if (showInputPage) {
-    return <InputPage setShowInputPage={setShowInputPage} />;
-  }
+  const navigate = useNavigate();
 
   return (
     <main
@@ -119,7 +115,7 @@ export default function OnboardingPage() {
             }}
           >
             <AppButton
-              onClick={() => setShowInputPage(true)}
+              onClick={() => navigate("/input")}
               rightIcon={<ArrowRight size={22} strokeWidth={2.8} />}
             >
               Get started

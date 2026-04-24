@@ -22,6 +22,8 @@ export const theme = {
     white: palette.white,
     tan: palette.tan,
     lightBrown: palette.lightBrown,
+    eggplant: palette.eggplant,
+    palePink: palette.palePink,
   },
 
   fonts: {
@@ -55,5 +57,6 @@ export const theme = {
   shadows: {
     primaryButton:
       "inset 0 2px 0 rgba(255,255,255,0.35), 0 3px 0 rgba(106,59,132,0.32), 0 6px 14px rgba(70,63,58,0.16)",
+    dropShadow: "0.5px 0.5px 4px rgba(0, 0, 0, 0.25)",
   },
 };
