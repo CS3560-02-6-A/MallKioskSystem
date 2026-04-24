@@ -1,6 +1,6 @@
 import { theme } from "../../styles/theme";
 
-export default function ProgressBar(step = 1, totalSteps = 3) {
+export default function ProgressBar({ step = 1 }) {
 
   return (
     <div
