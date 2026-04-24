@@ -1,6 +1,7 @@
 import { theme } from "../../styles/theme";
 
-export default function EndSessionButton({ children, style = {}, ...props }) {
+export default function EndSessionButton({ style = {}, ...props }) {
+  //OnClick -- Clear local storage, redirect to home page
   return (
     <button
       {...props}
@@ -24,7 +25,7 @@ export default function EndSessionButton({ children, style = {}, ...props }) {
         ...style,
       }}
     >
-      {children}
+      End Session
     </button>
   );
 }
