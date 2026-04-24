@@ -35,6 +35,7 @@ public class StoreHours {
 			case "saturday":
 			case "sunday":
 				this.dayOfWeek = dayOfWeek.toLowerCase();
+			break;
 			default:
 				throw new IllegalArgumentException("Not a real day of the week.");
 		}
