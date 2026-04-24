@@ -4,9 +4,7 @@ import { useState } from "react";
 import HeaderBar from "../../../components/ui/HeaderBar";
 import ProgressBar from "../../../components/ui/ProgressBar";
 import AppButton from "../../../components/ui/AppButton";
-import OccasionPage from "../../outfit-curator/pages/OccasionPage.jsx";
 import GoBackButton from "../../../components/ui/GoBackButton";
-import EndSessionButton from "../../../components/ui/EndSessionButton";
 import womanImage from "../../../assets/images/woman.png";
 import womanImageSelected from "../../../assets/images/womanSelected.png";
 import neutralImage from "../../../assets/images/neutral.png";
@@ -28,27 +26,9 @@ export default function InputPage({ setShowInputPage }) {
         fontFamily: theme.fonts.sans,
     }}
 >
-            <section
-                style={{
-                    width: "100%",
-                    minHeight: "clamp(88px, 12vh, 100px)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    padding: "clamp(16px, 2vw, 24px)",
-                    border: `1px solid ${theme.colors.text}`,
-                    background: "transparent",
-                }}
-            >
-                <GoBackButton
-                    onClick={() => setShowInputPage(false)}
-                    >
-                    ← Go Back
-                </GoBackButton>
-                <EndSessionButton>
-                    End Session
-                </EndSessionButton>
-            </section>
+        <HeaderBar> 
+            <ProgressBar/>
+        </HeaderBar>
             <h1
                 style={{
                     justifyContent: "center",
@@ -135,17 +115,10 @@ export default function InputPage({ setShowInputPage }) {
                     display: "flex",
                 }}
             >
-            <AppButton>
+            <AppButton Onclick={() => navigate("/occasion")}>
                 Continue
             </AppButton>
             </section>
-        <HeaderBar leftButton={"Change fit ←"} > 
-            <ProgressBar/>
-        </HeaderBar>
-        <AppButton               
-        >
-             Continue 
-    </AppButton>
     </main>
     );
 }
