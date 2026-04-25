@@ -21,8 +21,10 @@ SET @@SESSION.SQL_LOG_BIN= 0;
 -- GTID state at the beginning of the backup 
 --
 
-SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '4bd30c20-216e-11f1-b8d6-709188f6393a:1-34';
+-- SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '4bd30c20-216e-11f1-b8d6-709188f6393a:1-34';
 
+CREATE DATABASE IF NOT EXISTS mall_kiosk_system;
+USE mall_kiosk_system;
 --
 -- Table structure for table `inventory_tbl`
 --
