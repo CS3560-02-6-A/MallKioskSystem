@@ -4,7 +4,7 @@ import { useState } from "react";
 import HeaderBar from "../../../components/ui/HeaderBar";
 import ProgressBar from "../../../components/ui/ProgressBar";
 import AppButton from "../../../components/ui/AppButton";
-import CategoryTile from "../../../components/ui/CategoryTile";
+import OccasionTile from "../../../components/ui/OccasionTile";
 
 export default function OccasionPage() {
     const navigate = useNavigate();
@@ -75,7 +75,7 @@ export default function OccasionPage() {
                     alignItems: "center",
                 }}
             >
-                <CategoryTile
+                <OccasionTile
                   options={["Beach", "Work", "Casual", ]} //add more options here
                   onSelect={(label, index) => setSelectedShopper(index)}
                   style={{ width: "100%" }}
