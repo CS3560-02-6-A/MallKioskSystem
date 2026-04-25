@@ -7,9 +7,8 @@ import "./App.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter> {/* Wrap the App component with BrowserRouter to enable routing */}
       <App />
     </BrowserRouter>
-
   </React.StrictMode>
 );
