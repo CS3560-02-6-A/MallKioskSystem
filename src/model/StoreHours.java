@@ -10,7 +10,7 @@ public class StoreHours
 	public StoreHours(int hoursID, int storeID, String dayOfWeek, Time openTime, Time closeTime) 
 	{
 		this.hoursID = hoursID;
-		this.storeID = hoursID;
+		this.storeID = storeID;
 		this.dayOfWeek = dayOfWeek;
 		this.openTime = openTime;
 		this.closeTime = closeTime;
@@ -70,9 +70,10 @@ public class StoreHours
 	}
 	public Time getOpenTime() 
 	{
-		return new Time(openTime.hour, openTime.minute);
+		return new Time(openTime.getHour(), openTime.getMinute());
 	}
-	public Time getCloseTime() {
-		return new Time(closeTime.hour, closeTime.minute);
+	public Time getCloseTime() 
+	{
+		return new Time(closeTime.getHour(), closeTime.getMinute());
 	}
 }

@@ -1,14 +1,4 @@
 package src.model;
-package src.dao;
-
-
-import src.model.Store;
-import src.model.OperationHour;
-import src.model.DateHour;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class Store 
 {
@@ -40,33 +30,9 @@ public class Store
     { 
         return this.telephone;
     }
-    public OperationHour getHours(int storeID)
+    public OperationHour getHours()
     {
-        this.hours= new OperationHour();
-        String sql = "SELECT dayOfWeek, openTime, closeTime FROM storeHours_tbl WHERE storeID = ?";
-
-        try (Connection conn = databaseConnection.getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql)) 
-         {
-
-            stmt.setInt(1, storeID);
-            try (ResultSet rs = stmt.executeQuery()) 
-            {
-                while (rs.next()) 
-                {
-                    String range = rs.getString("openTime") + " - " + rs.getString("closeTime");
-                    this.hours.addDateHour(new DateHour(rs.getString("dayOfWeek"), range));
-                }
-        }
-
-    } 
-    catch (SQLException e) 
-    {
-        e.printStackTrace();
-    }
-
-    return this.hours;
-
+        return this.hours;
 
     }
 
