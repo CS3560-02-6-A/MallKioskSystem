@@ -4,7 +4,7 @@ import { useState } from "react";
 import HeaderBar from "../../../components/ui/HeaderBar";
 import ProgressBar from "../../../components/ui/ProgressBar";
 import AppButton from "../../../components/ui/AppButton";
-import ChoiceCard from "../../../components/ui/ChoiceCard";
+import CategoryTile from "../../../components/ui/CategoryTile";
 
 export default function OccasionPage() {
     const navigate = useNavigate();
@@ -24,6 +24,7 @@ export default function OccasionPage() {
             <HeaderBar>
                 <ProgressBar step={2} />
             </HeaderBar>
+        <section>
             <h1
                 style={{
                     justifyContent: "center",
@@ -56,6 +57,7 @@ export default function OccasionPage() {
                         display: "flex",
                         fontFamily: theme.fonts.display,
                         fontWeight: theme.fontWeights.regular,
+                        fontSize: "53px",
                         lineHeight: theme.lineHeights.tight,
                         color: theme.colors.text,
                         }}>
@@ -65,17 +67,28 @@ export default function OccasionPage() {
             <section
                 style={{
                     padding: "5px",
-                    justifyContent: "center",
                     display: "flex",
+                    flexDirection: "column",
+                    gap: "28px",
+                    width: "min(760px, 92%)",
+                    margin: "0 auto",
+                    alignItems: "center",
                 }}
             >
+                <CategoryTile
+                  options={["Beach", "Work", "Casual", ]} //add more options here
+                  onSelect={(label, index) => setSelectedShopper(index)}
+                  style={{ width: "100%" }}
+                />
                 <AppButton
-                    disabled={!selectedShopper}
-                    onClick={() => selectedShopper ? navigate("/occasion") : null}
+                    disabled={selectedShopper === null}
+                    onClick={() => (selectedShopper !== null ? navigate("/occasion") : null)}
                 >
-                    Continue 
+                    Continue
                 </AppButton>
             </section>
+        </section>
+
     </main>
     );
 }
