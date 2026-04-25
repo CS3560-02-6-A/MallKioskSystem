@@ -24,6 +24,7 @@ export const theme = {
     lightBrown: palette.lightBrown,
     eggplant: palette.eggplant,
     palePink: palette.palePink,
+    offWhite: palette.offWhite,
   },
 
   fonts: {
