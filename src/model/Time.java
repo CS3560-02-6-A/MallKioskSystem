@@ -1,25 +1,49 @@
 package src.model;
-public class Time {
-	int hour;
-	int minute;
-	public Time(int hour, int minute) {
-		setHour(hour);
-		setMinute(minute);
+public class Time 
+{
+	//INSTANCE VARIABLES
+	private int hour;
+	private int minute;
+
+	//CONSTRUCTOR
+	public Time(int hour, int minute) 
+	{
+		this.hour = hour;
+		this.minute = minute;
 	}
-	public void setHour(int hour) {
-		if (hour >= 0 && hour < 24) {
+	
+	//METHODS
+	//SETTER
+	public void setHour(int hour) 
+	{
+		if (hour >= 0 && hour < 24) 
+		{
 			this.hour = hour;
-		}else{throw new IllegalArgumentException("Illegal minute. The range of minute is 0<=minute<=59");}
+		}
+		else
+		{
+			throw new IllegalArgumentException("Illegal minute. The range of minute is 0<=minute<=59");
+		}
 	}
-	public void setMinute(int minute) {
-		if (minute >= 0 && minute < 60) {
+	public void setMinute(int minute) 
+	{
+		if (minute >= 0 && minute < 60) 
+		{
 			this.minute = minute;
-		}else{throw new IllegalArgumentException("Illegal hour. The range of hour is 0<=hour<=23");}
+		}
+		else
+		{
+			throw new IllegalArgumentException("Illegal hour. The range of hour is 0<=hour<=23");
+		}
 	}
-	public int getHour() {
-		return hour;
+	
+	//GETTER
+	public int getHour() 
+	{
+		return this.hour;
 	}
-	public int getMinute() {
-		return minute;
+	public int getMinute() 
+	{
+		return this.minute;
 	}
 }
