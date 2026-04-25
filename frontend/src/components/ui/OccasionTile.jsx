@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { theme } from "../../styles/theme";
 
-export default function CategoryTile({ options = [], onSelect, style = {} }) {
+export default function OccasionTile({ options = [], onSelect, style = {} }) {
   const [selectedIndex, setSelectedIndex] = useState(null);
 
   const handleSelect = (index) => {
@@ -32,7 +32,7 @@ export default function CategoryTile({ options = [], onSelect, style = {} }) {
               width: "100%",
               border: `2px solid ${theme.colors.lightBrown}`,
               borderRadius: "8px",
-              background: isSelected ? theme.colors.tan : theme.colors.offWhite,
+              background: isSelected ? theme.colors.tan : theme.colors.palePink,
               cursor: "pointer",
               padding: 0,
               overflow: "hidden",
