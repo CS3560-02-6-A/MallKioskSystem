@@ -4,6 +4,7 @@ public class Session {
 	private int sessionID;
 	private LocalDateTime startTime;
 	private LocalDateTime endTime;
+	public Session(int sessionID) {setSessionID(sessionID);}
 	public Session(int sessionID, LocalDateTime startTime, LocalDateTime endTime) {
 		setSessionID(sessionID);
 		setStartTime(startTime);
@@ -15,7 +16,6 @@ public class Session {
 			startTime = LocalDateTime.now();
 		}
 	}
-	public Session(int sessionID) {setSessionID(sessionID);}
 	public void endSession() {endTime = LocalDateTime.now();}
 	public void setSessionID(int sessionID) {this.sessionID = sessionID;}
 	public void setStartTime(LocalDateTime startTime) {this.startTime = startTime;}
