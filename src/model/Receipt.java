@@ -6,8 +6,9 @@ public class Receipt {
 	private int outfitID;
 	private LocalDateTime generatedAt;
 	private double totalPrice;
-	public Receipt(int receiptID) {
+	public Receipt(int receiptID, int sessionID) {
 		setReceiptID(receiptID);
+		setSessionID(sessionID);
 	}
 	public Receipt(int receiptID, int sessionID, int outfitID, LocalDateTime generatedAt, double totalPrice) {
 		setReceiptID(receiptID);
@@ -31,6 +32,6 @@ public class Receipt {
 	public int getReceiptID() {return receiptID;}
 	public int getSessionID() {return sessionID;}
 	public int getOutfitID() {return outfitID;}
-	public int getGeneratedAt() {return generatedAt;}
-	public int getTotalPrice() {return totalPrice;}
+	public LocalDateTime getGeneratedAt() {return generatedAt;}
+	public double getTotalPrice() {return totalPrice;}
 }
