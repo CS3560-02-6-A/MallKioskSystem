@@ -2,18 +2,23 @@ package src.app;
 
 import java.util.List;
 import src.dao.itemDAO;
+import src.dao.storeItemDAO;
+import src.model.StoreItem;
 import src.model.Item;
 
 public class Main 
 {
     public static void main(String[] args) 
     {
+        System.out.println(
+            "\n\n---------------BEGIN MAIN TESTING------------");
 
-        itemDAO dao = new itemDAO();
-        List<Item> items = dao.getAllItems();
 
-        for (Item item : items) {
-            System.out.println(item.getItemName());
+        storeItemDAO dao = new storeItemDAO();
+        List<StoreItem> items = dao.getAllItems();
+
+        for (StoreItem inItem : items) {
+            System.out.println(inItem.getItemId());
         }
 
         //TESTING FOR storeDAO
