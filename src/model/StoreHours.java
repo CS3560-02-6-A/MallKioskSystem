@@ -5,6 +5,7 @@ public class StoreHours {
 	private String dayOfWeek;
 	private Time openTime;
 	private Time closeTime;
+
 	public StoreHours(int hoursID, int storeID) {
 		setHoursID(hoursID);
 		setStoreID(storeID);
@@ -40,6 +41,7 @@ public class StoreHours {
 			case "saturday":
 			case "sunday":
 				this.dayOfWeek = dayOfWeek.toLowerCase();
+				break;
 			default:
 				throw new IllegalArgumentException("Not a real day of the week.");
 		}
@@ -60,9 +62,9 @@ public class StoreHours {
 		return dayOfWeek;
 	}
 	public Time getOpenTime() {
-		return new Time(openTime.hour, openTime.minute);
+		return new Time(openTime.getHour(), openTime.getMinute());
 	}
 	public Time getCloseTime() {
-		return new Time(closeTime.hour, closeTime.minute);
+		return new Time(closeTime.getHour(), closeTime.getMinute());
 	}
 }

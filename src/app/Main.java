@@ -16,6 +16,15 @@ public class Main
 
         storeItemDAO dao = new storeItemDAO();
         List<StoreItem> items = dao.getAllItems();
+            //TESTING FOR getItemsByGenderAndOccasion
+            //Need to verify to use StoreItem or Item
+        List<Item> filteredItems = dao.getItemsByGenderAndOccasion("woman", "casual");
+
+        for(Item i : filteredItems)
+        {
+            System.out.println(i.getItemName() + " - " + i.getGender() + " - " + i.getOccasion());
+        }
+
 
         for (StoreItem inItem : items) {
             System.out.println(inItem.getItemId());
