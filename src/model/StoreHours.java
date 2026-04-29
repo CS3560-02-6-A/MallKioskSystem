@@ -5,7 +5,12 @@ public class StoreHours {
 	private String dayOfWeek;
 	private Time openTime;
 	private Time closeTime;
+	public StoreHours(int hoursID, int storeID) {
+		setHoursID(hoursID);
+		setStoreID(storeID);
+	}
 	public StoreHours(int hoursID, int storeID, String dayOfWeek, Time openTime, Time closeTime) {
+		setHoursID(hoursID);
 		setStoreID(storeID);
 		setDayOfWeek(dayOfWeek);
 		setOpenTime(openTime);
