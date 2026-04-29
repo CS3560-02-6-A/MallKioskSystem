@@ -3,7 +3,7 @@ package src.dao;
 import java.sql.*;
 import java.util.*;
 import src.model.StoreItem;
-import src.model.Store;
+import src.model.Item;
 
 
 
@@ -39,5 +39,44 @@ public class storeItemDAO {
         }
 
         return inventory;
+    }
+
+    //This will filter items based on the gender and occasion but unisex will be included in any gender choice.
+    
+    /* 
+    Need to verify using StoreItem or Item for the return type since
+    - if we use StoreItem we can also prioritize inStock and store is open
+    - if we use Item we can get more details about the item but we won't know if it's in stock or not
+    */
+    public List<Item> getItemsByGenderAndOccasion(String gender, String occasion) {
+        List<Item> items = new ArrayList<>();
+        String sql = "SELECT ID, name, type, color, gender, occasion " +
+                     "FROM items_tbl " +
+                     "WHERE (gender = ? OR gender = 'unisex') AND occasion = ?";
+
+        try (Connection conn = databaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, gender);
+            ps.setString(2, occasion);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Item item = new Item(
+                        rs.getInt("ID"),
+                        rs.getString("name"),
+                        rs.getString("type"),
+                        rs.getString("color"),
+                        rs.getString("gender"),
+                        rs.getString("occasion")
+                    );
+                    items.add(item);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return items;
     }
 }
