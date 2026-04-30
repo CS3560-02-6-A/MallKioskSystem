@@ -47,6 +47,7 @@ export const theme = {
   },
 
   lineHeights: {
+    tightest: 0.5,
     tight: 1,
     normal: 1.2,
   },
