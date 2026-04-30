@@ -1,19 +1,16 @@
-import OnboardingPage from "./features/onboarding/pages/OnboardingPage";
-import InputPage from "./features/onboarding/pages/InputPage";
-import OccasionPage from "./features/outfit-curator/pages/OccasionPage";
-import OutfitBuilderPage from "./features/outfit-curator/pages/OutfitBuilderPage";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import OnboardingPage from "./features/onboarding/OnboardingPage";
+import Input_GenderPage from "./features/onboarding/Input_GenderPage";
+import Input_OccasionPage from "./features/onboarding/Input_OccasionPage";
+import OutfitBuilderPage from "./features/outfit-curator/OutfitBuilderPage"
 
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<OnboardingPage />} /> {/* Default route */}
-      <Route path="*" element={<Navigate to="/onboarding" replace />} />
-      <Route path="/onboarding" element={<OnboardingPage />} />
-      <Route path="/input" element={<InputPage />} />
-      <Route path="/occasion" element={<OccasionPage />} />
-      <Route path="/outfit" element={<OutfitBuilderPage />} /> 
-
+      <Route path="/" element={<OnboardingPage />} />
+      <Route path="/gender" element={<Input_GenderPage />} />
+      <Route path="/occasion" element={<Input_OccasionPage />} />
+      <Route path="/builder" element={<OutfitBuilderPage />} />
     </Routes>
   );
 }

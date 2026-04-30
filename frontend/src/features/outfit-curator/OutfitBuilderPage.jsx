@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { theme } from "../../../styles/theme";
-import HeaderBar from "../../../components/ui/HeaderBar";
-import AppButton from "../../../components/ui/AppButton";
+import { useNavigate } from "react-router-dom";
+import { theme } from "../../styles/theme";
+import HeaderBar from "../../components/ui/HeaderBar";
+import AppButton from "../../components/ui/AppButton";
 
-const CATEGORIES = [ // add more categories and adjust heights as needed
+
+const CATEGORIES = [
   { label: "Accessories", height: "120px" },
   { label: "Top",         height: "200px" },
   { label: "Bottom",      height: "340px" },
@@ -11,8 +13,9 @@ const CATEGORIES = [ // add more categories and adjust heights as needed
 ];
 
 export default function OutfitBuilderPage() {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const filledCount = 0; // replace with real count later
+  const filledCount = 0;
 
   return (
     <main
@@ -43,7 +46,6 @@ export default function OutfitBuilderPage() {
         </h1>
       </HeaderBar>
 
-      {/* Two-panel row */}
       <div
         style={{
           display: "flex",
@@ -53,7 +55,6 @@ export default function OutfitBuilderPage() {
           minHeight: 0,
         }}
       >
-        {/* Left — category selector */}
         <div
           style={{
             display: "flex",
@@ -90,6 +91,7 @@ export default function OutfitBuilderPage() {
           >
             {CATEGORIES.map((cat) => {
               const isSelected = selectedCategory === cat.label;
+              
               return (
                 <button
                   key={cat.label}
