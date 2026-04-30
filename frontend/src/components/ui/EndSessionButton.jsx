@@ -2,7 +2,7 @@ import { theme } from "../../styles/theme";
 
 export default function EndSessionButton({ style = {}, ...props }) {
   const handleEndSession = () => {
-    window.location.assign("/onboarding");
+    window.location.assign("/");
   };
 
   //OnClick -- Clear local storage, redirect to home page
