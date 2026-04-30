@@ -1,50 +1,72 @@
 package src.app;
 
 import java.util.List;
+import src.dao.itemDAO;
+import src.dao.storeItemDAO;
 import src.model.StoreItem;
-import src.service.mallKioskService;
+import src.model.Item;
 
 public class Main 
 {
     public static void main(String[] args) 
     {
-        System.out.println("Begin Main Testing");
+        System.out.println("BEGIN MAIN TESTING");
+        System.out.println("TESTING storeItemDAO...");
+        storeItemDAO dao = new storeItemDAO();
+        
 
-        mallKioskService service = new mallKioskService();
-        System.out.println("Generating outfit for women formal occasion...");
-        List<StoreItem> outfit1 = service.generateOutfit("women", "formal");
-        if(outfit1.isEmpty())
-        {
-            System.out.println("No items found for that outfit.");
-            System.out.println("Check DB for gender='women' and occasion='formal' items.");
-        }
-        for(StoreItem item: outfit1)
+        //Testing for getting all items with full data paramaters, filtered.
+        System.out.println("Testing for getting all items with full data paramaters, filtered.");
+        List<StoreItem> filteredItems = dao.getItemsFullDataWithFilters("women", "casual");
+
+        for (StoreItem i : filteredItems) 
         {
             System.out.println(
-                item.getItemName() + " | " +
-                item.getItemType() + " | " +
-                item.getItemColor() + " | " +
-                item.getOccasion() + " | " +
-                item.getGender() + " | " +
-                item.getPrice() + " | " +
-                item.getAisle()
+               "Name: " + i.getItemName() +
+            " | Type: " + i.getItemType() +
+            " | Color: " + i.getItemColor() +
+            " | Gender: " + i.getGender() +
+            " | Occasion: " + i.getOccasion() +
+            " | StoreID: " + i.getStoreId() +
+            " | ItemID: " + i.getItemId() +
+            " | Price: $" + i.getPrice() +
+            " | InStock: " + i.isInStock() +
+            " | Aisle: " + i.getAisle()
             );
         }
 
-         if (!outfit1.isEmpty()) 
-         {
-            int testItemId = outfit1.get(0).getItemID();
-            System.out.println("\n=== getStoreInfoForItem(" + testItemId + ") ===");
-            List<StoreItem> stores = service.getStoreInfoForItem(testItemId);
-            for (StoreItem si : stores) 
-            {
-                System.out.println(
-                    "Store " + si.getStoreId() +
-                    " | $" + si.getPrice() +
-                    " | In Stock: " + si.isInStock() +
-                    " | Aisle: " + si.getAisle()
-                );
-            }
-         }
+        //Testing for getting all items with full data paramaters, no filtering.
+        System.out.println("Testing for getting all items with full data paramaters, no filtering.");
+        List<StoreItem> items = dao.getItemsFullData();
+        //Print out the first five items.
+        for(int i = 0; i < 5; ++i)
+        {
+             System.out.println(
+               "Name: " + i.getItemName() +
+            " | Type: " + i.getItemType() +
+            " | Color: " + i.getItemColor() +
+            " | Gender: " + i.getGender() +
+            " | Occasion: " + i.getOccasion() +
+            " | StoreID: " + i.getStoreId() +
+            " | ItemID: " + i.getItemId() +
+            " | Price: $" + i.getPrice() +
+            " | InStock: " + i.isInStock() +
+            " | Aisle: " + i.getAisle()
+            );
+        }
+                
+
+        //TESTING FOR storeDAO
+        System.out.println("TESTING FOR storeDAO...");
+        storeDAO myStoreDAO = new storeDAO();
+        //Printing out all stores.
+        List<Store> stores = myStoreDAO.getAllStores();
+        for(Store s: stores)
+        {
+            System.out.println(s.getStoreID() + " - " + s.getStoreName());
+            System.out.println(s.getHours().printOperationHour());
+            System.out.println();
+        }
+
     }
 }
