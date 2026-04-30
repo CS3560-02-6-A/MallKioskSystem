@@ -5,6 +5,8 @@ import src.dao.itemDAO;
 import src.dao.storeItemDAO;
 import src.model.StoreItem;
 import src.model.Item;
+import src.doa.storeDAO;
+import src.model.Store;
 
 public class Main 
 {
@@ -44,16 +46,16 @@ public class Main
         {
              System.out.println("Item number " + (i+1));
              System.out.println(
-               "Name: " + i.getItemName() +
-            " | Type: " + i.getItemType() +
-            " | Color: " + i.getItemColor() +
-            " | Gender: " + i.getGender() +
-            " | Occasion: " + i.getOccasion() +
-            " | StoreID: " + i.getStoreId() +
-            " | ItemID: " + i.getItemId() +
-            " | Price: $" + i.getPrice() +
-            " | InStock: " + i.isInStock() +
-            " | Aisle: " + i.getAisle()
+               "Name: " + items.get(i).getItemName() +
+            " | Type: " + items.get(i).getItemType() +
+            " | Color: " + items.get(i).getItemColor() +
+            " | Gender: " + items.get(i).getGender() +
+            " | Occasion: " + items.get(i).getOccasion() +
+            " | StoreID: " + items.get(i).getStoreId() +
+            " | ItemID: " + items.get(i).getItemId() +
+            " | Price: $" + items.get(i).getPrice() +
+            " | InStock: " + items.get(i).isInStock() +
+            " | Aisle: " + items.get(i).getAisle()
             );
         }
                 
