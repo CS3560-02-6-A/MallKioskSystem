@@ -1,36 +1,32 @@
 package src.service;
 
 import java.util.*;
-import src.dao.itemDAO;
 import src.dao.storeItemDAO;
-import src.model.Item;
 import src.model.StoreItem;
 
 
 public class mallKioskService 
 {
-    private itemDAO myItemDAO;
     private storeItemDAO myStoreItemDAO;
 
     //Constructor 
     public mallKioskService()
     {
-        this.myItemDAO = new itemDAO();
         this.myStoreItemDAO = new storeItemDAO();
     }
 
     public List<StoreItem> getStoreInfoForItem(int itemId)
     {
-        return myStoreItemDAO.getInvetoryForItem(itemId);
+        return myStoreItemDAO.getInventoryByItem(itemId);
     }
-    public List<Item> generateOutfit(String gender, String occasion)
+    public List<StoreItem> generateOutfit(String gender, String occasion)
     {
-        List<Item> candidates = myItemDAO.getItemsByGenderAndOccasion(gender, occasion);
-        List<Item> outfit = new ArrayList<>();
+        List<StoreItem> candidates = myStoreItemDAO.getItemsByGenderAndOccasion(gender, occasion);
+        List<StoreItem> outfit = new ArrayList<>();
 
-        Map<String, List<Item>> byType = new HashMap<>();
+        Map<String, List<StoreItem>> byType = new HashMap<>();
 
-        for(Item item: candidates)
+        for(StoreItem item: candidates)
         {
             //Check if the map already has a list for that type. 
             //If yes, use that list. If no, create a new empty list and put it in the map.
@@ -46,7 +42,7 @@ public class mallKioskService
 
         //Shuffle up each group of items to avoid picking the same item first. 
         //Purpose is to increase randomness for users. 
-        for (List<Item> group: byType.values())
+        for (List<StoreItem> group: byType.values())
         {
             //Loop through each list of same type items
             //byType.values() gives me the list of all items stores in the map
@@ -56,17 +52,110 @@ public class mallKioskService
 
         if(occasion.equalsIgnoreCase("formal") && gender.equalsIgnoreCase("women"))
         {
-            Item dress = pick(byType, "Dress");
-            //Continue here. Stop at 6:49pm 04/27/2026 (Chau)
+            StoreItem dress = pick(byType, "Dress");
+            if(dress != null)
+            {
+                outfit.add(dress);
+            }
+
+            StoreItem shirt = pick(byType, "Shirt");
+            if(shirt != null)
+            {
+                outfit.add(shirt);
+            }
+
+            StoreItem pants = pick(byType, "Pants");
+            if(pants != null)
+            {
+                outfit.add(pants);
+            }
+
+            StoreItem jacket = pick(byType, "Jacket");
+            if(jacket != null)
+            {
+                outfit.add(jacket);
+            }
+
+            StoreItem accessory = pick(byType, "Accessory");
+            if(accessory != null)
+            {
+                outfit.add(accessory);
+            }
         }
+        else if(occasion.equalsIgnoreCase("formal") && gender.equalsIgnoreCase("men"))
+        {
+            StoreItem shirt = pick(byType, "Shirt");
+            if(shirt != null)
+            {
+                outfit.add(shirt);
+            }   
+
+            StoreItem pants = pick(byType, "Pants");
+            if(pants != null)
+            {
+                outfit.add(pants);
+            }
+
+            StoreItem suit = pick(byType, "Suit");
+            if(suit != null)
+            {
+                outfit.add(suit);
+            }
+
+            StoreItem accessory = pick(byType, "Accessory");
+            if(accessory != null)   
+            {
+                outfit.add(accessory);
+            }
+        }
+        else  
+        {
+            //Casual - any gender
+            StoreItem shirt = pick(byType, "Shirt");
+            if(shirt != null)
+            {
+                outfit.add(shirt);
+            }   
+
+            StoreItem sweater = pick(byType, "Sweater");
+            if(sweater != null)
+            {
+                outfit.add(sweater);
+            }
+
+            StoreItem pants = pick(byType, "Pants");
+            if(pants != null)
+            {
+                outfit.add(pants);
+            }
+
+            StoreItem shorts = pick(byType, "shorts");
+            if(shorts != null)
+            {
+                outfit.add(shorts);
+            }
+
+            StoreItem loungeWear = pick(byType, "loungeWear");
+            if(loungeWear != null)
+            {
+                outfit.add(loungeWear);
+            }
+
+            StoreItem accessory = pick(byType, "Accessory");
+            if(accessory != null)
+            {
+                outfit.add(accessory);
+            }
+        }
+
           return outfit;
     }
    
    //Helper functions
-   private Item pick(Map<String, List<Item>> map, String type)
+   private StoreItem pick(Map<String, List<StoreItem>> map, String type)
    {
         //Look up items by type
-        List<Item> group = map.get(type);
+        List<StoreItem> group = map.get(type);
         if (group == null || group.isEmpty())
         {
             //Return null if nothing exist. 

@@ -49,8 +49,8 @@ public class storeItemDAO {
     - if we use StoreItem we can also prioritize inStock and store is open
     - if we use Item we can get more details about the item but we won't know if it's in stock or not
     */
-    public List<Item> getItemsByGenderAndOccasion(String gender, String occasion) {
-        List<Item> items = new ArrayList<>();
+    public List<StoreItem> getItemsByGenderAndOccasion(String gender, String occasion) {
+        List<StoreItem> items = new ArrayList<>();
         String sql = "SELECT ID, name, type, color, gender, occasion " +
                      "FROM items_tbl " +
                      "WHERE (gender = ? OR gender = 'unisex') AND occasion = ?";
@@ -63,7 +63,7 @@ public class storeItemDAO {
 
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    Item item = new Item(
+                    StoreItem item = new StoreItem(
                         rs.getInt("ID"),
                         rs.getString("name"),
                         rs.getString("type"),

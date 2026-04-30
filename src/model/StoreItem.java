@@ -1,6 +1,4 @@
 package src.model;
-import java.sql.*;
-imprt java.util.*;
 
 public class StoreItem 
 {
@@ -65,5 +63,4 @@ public class StoreItem
     public void setGender(String gender) { this.gender = gender; }
     public void setOccasion(String occasion) { this.occasion = occasion; }
 
-    
 }
