@@ -38,9 +38,11 @@ public class Main
         //Testing for getting all items with full data paramaters, no filtering.
         System.out.println("Testing for getting all items with full data paramaters, no filtering.");
         List<StoreItem> items = dao.getItemsFullData();
-        //Print out the first five items.
+        
+        System.out.println("Print out the first five items.");
         for(int i = 0; i < 5; ++i)
         {
+             System.out.println("Item number " + (i+1));
              System.out.println(
                "Name: " + i.getItemName() +
             " | Type: " + i.getItemType() +
