@@ -18,21 +18,24 @@ public class StoreHours {
 		this.dayOfWeek = dayOfWeek;
 		this.openTime = openTime;
 		this.closeTime = closeTime;
+
 	}
-	
-	public void setHoursID(int hoursID) {
+	public void setHoursID(int hoursID) 
+	{
 		//We must make sure that this hours ID is not the same
 		//as any other hours ID connected to a particular store.
 		//Where may I find a function to check for this?
 		this.hoursID = hoursID;
 	}
-	public void setStoreID(int storeID) {
+	public void setStoreID(int storeID) 
+	{
 		//We must make sure that this store ID is not the same
 		//as any other store ID. Where may I find a function to
 		//check for this?
 		this.storeID = storeID;
 	}
-	public void setDayOfWeek(String dayOfWeek) {
+	public void setDayOfWeek(String dayOfWeek) 
+	{
 		//Store can make sure that it does not have multiple
 		//operation hours on the same day of week.
 		switch (dayOfWeek.toLowerCase()) {
@@ -49,7 +52,8 @@ public class StoreHours {
 				throw new IllegalArgumentException("Not a real day of the week.");
 		}
 	}
-	public void setOpenTime(Time openTime) {
+	public void setOpenTime(Time openTime) 
+	{
 		this.openTime = openTime;
 	}
 	public void setCloseTime(Time closeTime) {

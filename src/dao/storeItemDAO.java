@@ -2,15 +2,16 @@ package src.dao;
 
 import java.sql.*;
 import java.util.*;
-import src.model.StoreItem;
 import src.model.Item;
+import src.model.StoreItem;
 
 
 
 public class storeItemDAO {
 
-    public List<StoreItem> getAllItems() {
-        List<StoreItem> inventory = new ArrayList<StoreItem>();
+    public List<StoreItem> getAllItems() 
+    {
+        List<StoreItem> inventory = new ArrayList<>();
 
 //        USE THIS IF WE WANT FULL ITEM DETAILS IN THE STOREITEM OBJECT.
 //        e_ String sql = 
@@ -86,7 +87,7 @@ public class storeItemDAO {
     String sql = "SELECT si.storeID, si.itemID, si.inStock, si.price, si.aisle, " +
                  "i.name, i.type, i.color, i.gender, i.occasion " +
                  "FROM inventory_tbl si " +
-                 "JOIN items_tbl i ON si.itemID = i.ID" + 
+                 "JOIN items_tbl i ON si.itemID = i.ID " + 
                  "WHERE si.inStock = true"
                  ;
 
@@ -164,4 +165,74 @@ public class storeItemDAO {
     return items;
 }
 
+public List<StoreItem> getInventoryByStore(int storeID) 
+    {
+        List<StoreItem> inventory = new ArrayList<>();
+
+        String sql = "SELECT storeID, itemID, inStock, price, aisle FROM inventory_tbl WHERE storeID = ?";
+
+        try (Connection conn = databaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) 
+            {
+
+                ps.setInt(1, storeID);
+
+                try (ResultSet rs = ps.executeQuery()) 
+                {
+                    while (rs.next()) 
+                    {
+                        inventory.add(new StoreItem(
+                                rs.getInt("storeID"),
+                                rs.getInt("itemID"),
+                                rs.getBoolean("inStock"),
+                                rs.getDouble("price"),
+                                rs.getString("aisle")
+                            ));
+                    }  
+                }             
+
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+
+        return inventory;
+    }
+
+    //Get inventory for item by itemID.
+    public List<StoreItem> getInventoryByItem(int itemID)
+    {
+        List<StoreItem> inventory = new ArrayList<>();
+
+        String sql = "SELECT storeID, itemID, inStock, price, aisle FROM inventory_tbl WHERE itemID = ?";
+
+        try (Connection conn = databaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) 
+            {
+
+                ps.setInt(1, itemID);
+
+                try (ResultSet rs = ps.executeQuery()) 
+                {
+                    while (rs.next()) 
+                    {
+                        inventory.add(new StoreItem(
+                                rs.getInt("storeID"),
+                                rs.getInt("itemID"),
+                                rs.getBoolean("inStock"),
+                                rs.getDouble("price"),
+                                rs.getString("aisle")
+                            ));
+                    }  
+                }             
+
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+
+        return inventory;   
+    }
 }
