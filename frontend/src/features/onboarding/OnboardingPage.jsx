@@ -1,8 +1,8 @@
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import AppButton from "../../../components/ui/AppButton";
-import { theme } from "../../../styles/theme";
-import sketchImage from "../../../assets/images/img_sketch.png";
+import AppButton from "../../components/ui/AppButton";
+import { theme } from "../../styles/theme";
+import sketchImage from "../../assets/images/img_sketch.png";
 
 export default function OnboardingPage() {
   const navigate = useNavigate();
@@ -115,7 +115,7 @@ export default function OnboardingPage() {
             }}
           >
             <AppButton
-              onClick={() => navigate("/input")}
+              onClick={() => navigate("/gender")}
               rightIcon={<ArrowRight size={22} strokeWidth={2.8} />}
             >
               Get started
