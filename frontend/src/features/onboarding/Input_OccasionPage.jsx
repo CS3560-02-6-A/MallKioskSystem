@@ -85,7 +85,7 @@ export default function OccasionPage() {
                     />
                     <AppButton
                         disabled={selectedShopper === null}
-                        onClick={() => (selectedShopper !== null ? navigate("/outfit") : null)}
+                        onClick={() => (selectedShopper !== null ? navigate("/builder") : null)}
                     >
                         Continue
                     </AppButton>

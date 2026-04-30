@@ -46,7 +46,6 @@ export default function OutfitBuilderPage() {
         </h1>
       </HeaderBar>
 
-      {/* Two-panel row */}
       <div
         style={{
           display: "flex",
@@ -56,7 +55,6 @@ export default function OutfitBuilderPage() {
           minHeight: 0,
         }}
       >
-        {/* Left — category selector */}
         <div
           style={{
             display: "flex",
@@ -93,6 +91,7 @@ export default function OutfitBuilderPage() {
           >
             {CATEGORIES.map((cat) => {
               const isSelected = selectedCategory === cat.label;
+              
               return (
                 <button
                   key={cat.label}

@@ -115,7 +115,7 @@ export default function OnboardingPage() {
             }}
           >
             <AppButton
-              onClick={() => navigate("/input")}
+              onClick={() => navigate("/gender")}
               rightIcon={<ArrowRight size={22} strokeWidth={2.8} />}
             >
               Get started
