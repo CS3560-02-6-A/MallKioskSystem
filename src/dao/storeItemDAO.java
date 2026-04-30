@@ -2,15 +2,15 @@ package src.dao;
 
 import java.sql.*;
 import java.util.*;
-import src.model.StoreItem;
 import src.model.Item;
+import src.model.StoreItem;
 
 
 
 public class storeItemDAO {
 
     public List<StoreItem> getAllItems() {
-        List<StoreItem> inventory = new ArrayList<StoreItem>();
+        List<StoreItem> inventory = new ArrayList<>();
 
 //        USE THIS IF WE WANT FULL ITEM DETAILS IN THE STOREITEM OBJECT.
 //        e_ String sql = 
@@ -86,7 +86,7 @@ public class storeItemDAO {
     String sql = "SELECT si.storeID, si.itemID, si.inStock, si.price, si.aisle, " +
                  "i.name, i.type, i.color, i.gender, i.occasion " +
                  "FROM inventory_tbl si " +
-                 "JOIN items_tbl i ON si.itemID = i.ID" + 
+                 "JOIN items_tbl i ON si.itemID = i.ID " + 
                  "WHERE si.inStock = true"
                  ;
 
