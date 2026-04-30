@@ -1,9 +1,20 @@
+import { useNavigate } from "react-router-dom";
 import { theme } from "../../styles/theme";
 
-export default function GoBackButton({ children, style = {}, ...props }) {
+export default function GoBackButton({ destination, children, style = {}, ...props }) {
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    if (destination) {
+      navigate(destination);
+    } else {
+      navigate(-1);
+    }
+  };
   return (
     <button
       {...props}
+      onClick={handleGoBack}
       style={{
         display: "inline-flex",
         alignItems: "center",
