@@ -6,17 +6,20 @@ public class StoreHours {
 	private Time openTime;
 	private Time closeTime;
 
-	public StoreHours(int hoursID, int storeID) {
-		setHoursID(hoursID);
-		setStoreID(storeID);
+	public StoreHours(int hoursID, int storeID) 
+	{
+		this.hoursID = hoursID;
+		this.storeID = storeID;
 	}
-	public StoreHours(int hoursID, int storeID, String dayOfWeek, Time openTime, Time closeTime) {
-		setHoursID(hoursID);
-		setStoreID(storeID);
-		setDayOfWeek(dayOfWeek);
-		setOpenTime(openTime);
-		setCloseTime(closeTime);
+	public StoreHours(int hoursID, int storeID, String dayOfWeek, Time openTime, Time closeTime) 
+	{
+		this.hoursID = hoursID;
+		this.storeID = storeID;
+		this.dayOfWeek = dayOfWeek;
+		this.openTime = openTime;
+		this.closeTime = closeTime;
 	}
+	
 	public void setHoursID(int hoursID) {
 		//We must make sure that this hours ID is not the same
 		//as any other hours ID connected to a particular store.
