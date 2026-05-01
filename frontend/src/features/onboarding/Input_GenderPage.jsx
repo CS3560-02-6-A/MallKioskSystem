@@ -26,7 +26,7 @@ export default function Input_GenderPage() {
             style={{
                 height: "100vh",
                 width: "100%",
-                overflow: "scroll",
+                overflow: "none",
                 background: theme.colors.page,
                 color: theme.colors.text,
                 fontFamily: theme.fonts.sans,
@@ -37,51 +37,48 @@ export default function Input_GenderPage() {
                 <ProgressBar step={1} />
             </HeaderBar>
 
-            <section
+            <section //TITLE AND TAGLINE SECTION
                 style={{
-                width: "100%",
-                height: "calc(100vh - 110px)",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "0 24px",
-                boxSizing: "border-box",
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    boxSizing: "border-box",
                 }}
             >
-                <h1
+                <h1 
                     style={{
                         justifyContent: "center",
                         display: "flex",
                         fontFamily: theme.fonts.display,
                         fontSize: theme.fontSizes.onboardingTitle,
                         fontWeight: theme.fontWeights.regular,
-                        lineHeight: theme.lineHeights.tight,
+                        lineHeight: theme.lineHeights.tightest,
                         color: theme.colors.text,
                     }}
                 >
                     How would you like to shop?
                 </h1>
 
-                <p
+                <h2
                     style={{
                         justifyContent: "center",
                         display: "flex",
                         fontFamily: theme.fonts.sans,
                         fontSize: theme.fontSizes.onboardingTagline,
                         fontWeight: theme.fontWeights.light,
-                        lineHeight: theme.lineHeights.normal,
+                        lineHeight: theme.lineHeights.tightest,
                         color: theme.colors.mutedText,
                     }}
                 >
                     This filters the catalog.
-                </p>
+                </h2>
 
             </section>
 
-            <section
+            <section    //GENDER CHOICE CARDS SECTION
                 style={{
-                    marginTop: "10px",
                     marginBottom: "10px",
                     display: "flex",
                     alignItems: "center",

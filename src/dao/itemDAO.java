@@ -60,8 +60,8 @@ public class itemDAO
                         rs.getString("type"),
                         rs.getString("color"),
                         rs.getString("gender"),
-                        rs.getString("occasion")
-                    ));
+                        rs.getString("occasion"))
+                        );
                 }
             }
 
