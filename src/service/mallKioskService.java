@@ -1,79 +1,246 @@
 package src.service;
 
+import java.sql.*;
 import java.util.*;
-import src.dao.itemDAO;
+import src.dao.databaseConnection;
+import src.dao.receiptDAO;
 import src.dao.storeItemDAO;
-import src.model.Item;
+import src.model.outfitGenerator;
+import src.model.Receipt;
 import src.model.StoreItem;
 
 
 public class mallKioskService 
 {
-    private itemDAO myItemDAO;
     private storeItemDAO myStoreItemDAO;
+    private receiptDAO myReceiptDAO;
+	private outfitGenerator myGenerator;
 
     //Constructor 
     public mallKioskService()
     {
-        this.myItemDAO = new itemDAO();
         this.myStoreItemDAO = new storeItemDAO();
+        this.myReceiptDAO = new receiptDAO();
+		this.myGenerator = new outfitGenerator();
     }
+
+    //Methods
+
+	public List <StoreItem> generateOutfit(String gender, String occasion) {
+		List<StoreItem> filtered = myStoreItemDAO.getItemsFullDataWithFilters(gender, occasion);
+		return myGenerator.generateFullOutfitList(filtered);
+	}
 
     public List<StoreItem> getStoreInfoForItem(int itemId)
     {
-        return myStoreItemDAO.getInvetoryForItem(itemId);
+        return myStoreItemDAO.getInventoryByItem(itemId);
     }
-    public List<Item> generateOutfit(String gender, String occasion)
+
+    public List<StoreItem> getAllItems()
     {
-        List<Item> candidates = myItemDAO.getItemsByGenderAndOccasion(gender, occasion);
-        List<Item> outfit = new ArrayList<>();
+        List<StoreItem> inventory = new ArrayList<>();
+        String sql = "SELECT * FROM inventory_tbl";
+        try (Connection conn = databaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
 
-        Map<String, List<Item>> byType = new HashMap<>();
-
-        for(Item item: candidates)
-        {
-            //Check if the map already has a list for that type. 
-            //If yes, use that list. If no, create a new empty list and put it in the map.
-    
-            String type = item.getItemType();
-            if(!byType.containsKey(type))
-            {
-                byType.put(type, new ArrayList<>());
+            while (rs.next()) {
+                StoreItem inItem = new StoreItem(
+                    rs.getInt("storeID"),
+                    rs.getInt("itemID"),
+                    rs.getBoolean("inStock"),
+                    rs.getDouble("price"),
+                    rs.getString("aisle")
+                );
+                inventory.add(inItem);
             }
 
-            byType.get(type).add(item);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
-        //Shuffle up each group of items to avoid picking the same item first. 
-        //Purpose is to increase randomness for users. 
-        for (List<Item> group: byType.values())
-        {
-            //Loop through each list of same type items
-            //byType.values() gives me the list of all items stores in the map
-            //the shuffle function helps me randomly reorders the items inside that list.
-            Collections.shuffle(group);
-        }
-
-        if(occasion.equalsIgnoreCase("formal") && gender.equalsIgnoreCase("women"))
-        {
-            Item dress = pick(byType, "Dress");
-            //Continue here. Stop at 6:49pm 04/27/2026 (Chau)
-        }
-          return outfit;
+        return inventory;
+        
     }
-   
-   //Helper functions
-   private Item pick(Map<String, List<Item>> map, String type)
-   {
-        //Look up items by type
-        List<Item> group = map.get(type);
-        if (group == null || group.isEmpty())
+
+    public List<StoreItem> getItemsFullData() 
+    {
+        List<StoreItem> items = new ArrayList<>();
+    
+        String sql = "SELECT si.storeID, si.itemID, si.inStock, si.price, si.aisle, " +
+                     "i.name, i.type, i.color, i.gender, i.occasion " +
+                     "FROM inventory_tbl si " +
+                     "JOIN items_tbl i ON si.itemID = i.ID " + 
+                     "WHERE si.inStock = true"
+                     ;
+    
+        try (Connection conn = databaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) 
         {
-            //Return null if nothing exist. 
-            return null;
+    
+            while (rs.next()) 
+            {
+                StoreItem item = new StoreItem(
+                    rs.getInt("storeID"),
+                    rs.getInt("itemID"),
+                    rs.getBoolean("inStock"),
+                    rs.getDouble("price"),
+                    rs.getString("aisle"),
+                    rs.getString("name"),
+                    rs.getString("type"),
+                    rs.getString("color"),
+                    rs.getString("gender"),
+                    rs.getString("occasion")
+                );
+                items.add(item);
+            }
+
+        } 
+         catch (SQLException e) 
+        {
+        e.printStackTrace();
         }
-        //If any exist, we will take the first one.
-        return group.get(0);
-   }
+
+    return items;
+}
+
+    public List<StoreItem> getItemsFullDataWithFilters(String gender, String occasion) {
+    List<StoreItem> items = new ArrayList<>();
+
+    String sql = "SELECT si.storeID, si.itemID, si.inStock, si.price, si.aisle, " +
+                 "i.name, i.type, i.color, i.gender, i.occasion " +
+                 "FROM inventory_tbl si " +
+                 "JOIN items_tbl i ON si.itemID = i.ID " +  
+                 "WHERE si.inStock = true " +
+                 "AND (i.gender = ? OR i.gender = 'unisex' OR ? IS NULL) " +
+                 "AND (i.occasion = ? OR ? IS NULL)";
+
+    try (Connection conn = databaseConnection.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        // Gender (used twice)
+        ps.setString(1, gender);
+        ps.setString(2, gender);
+
+        // Occasion (used twice)
+        ps.setString(3, occasion);
+        ps.setString(4, occasion);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                StoreItem item = new StoreItem(
+                    rs.getInt("storeID"),
+                    rs.getInt("itemID"),
+                    rs.getBoolean("inStock"),
+                    rs.getDouble("price"),
+                    rs.getString("aisle"),
+                    rs.getString("name"),
+                    rs.getString("type"),
+                    rs.getString("color"),
+                    rs.getString("gender"),
+                    rs.getString("occasion")
+                );
+                items.add(item);
+            }
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return items;
+}
+
+
+    public List<StoreItem> getInventoryByStore(int storeID) 
+    {
+        List<StoreItem> inventory = new ArrayList<>();
+
+        String sql = "SELECT storeID, itemID, inStock, price, aisle FROM inventory_tbl WHERE storeID = ?";
+
+        try (Connection conn = databaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) 
+            {
+
+                ps.setInt(1, storeID);
+
+                try (ResultSet rs = ps.executeQuery()) 
+                {
+                    while (rs.next()) 
+                    {
+                        inventory.add(new StoreItem(
+                                rs.getInt("storeID"),
+                                rs.getInt("itemID"),
+                                rs.getBoolean("inStock"),
+                                rs.getDouble("price"),
+                                rs.getString("aisle")
+                            ));
+                    }  
+                }             
+
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+
+        return inventory;
+    }
+ //Get inventory for item by itemID.
+    public List<StoreItem> getInventoryByItem(int itemID)
+    {
+        List<StoreItem> inventory = new ArrayList<>();
+
+        String sql = "SELECT storeID, itemID, inStock, price, aisle FROM inventory_tbl WHERE itemID = ?";
+
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mall_kiosk", "username", "password");
+             PreparedStatement ps = connection.prepareStatement(sql)) 
+            {
+
+                ps.setInt(1, itemID);
+
+                try (ResultSet rs = ps.executeQuery()) 
+                {
+                    while (rs.next()) 
+                    {
+                        inventory.add(new StoreItem(
+                                rs.getInt("storeID"),
+                                rs.getInt("itemID"),
+                                rs.getBoolean("inStock"),
+                                rs.getDouble("price"),
+                                rs.getString("aisle")
+                            ));
+                    }  
+                }             
+
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+
+        return inventory;   
+    }
+    
+    public Receipt generaReceipt(List<StoreItem> outfit, int sessionID)
+    {
+        double totalPrice = 0.0;
+        for (StoreItem item: outfit)
+        {
+            totalPrice += item.getPrice();
+        }
+
+        //Review constructor for Receipt class: 
+        //public Receipt(int receiptID, int sessionID, int outfitID, double totalPrice)
+        //Because receiptID and outfitID are auto-generated in the database, we can set them to 0.
+        //MySQL will treat this as a signal to generate the next ID.
+
+        Receipt receipt = new Receipt(0, sessionID, 0, totalPrice);//still need to figure out where the sessionID come from.
+        myReceiptDAO.saveReceipt(receipt);
+        return receipt;
+    }   
+    
+    
     
 }
