@@ -17,8 +17,7 @@ public class Main
         outfitGenerator generator = new outfitGenerator();
         storeItemDAO dao = new storeItemDAO();
 
-        List<StoreItem> filteredItems = dao.getItemsFullDataWithFilters("women", null);
-        List<StoreItem> outfit = generator.generateFullOutfitList(filteredItems);
+        List<StoreItem> outfit = service.generateOutfit("women", null);
         
           for (StoreItem i : outfit)
         {

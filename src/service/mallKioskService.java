@@ -5,6 +5,7 @@ import java.util.*;
 import src.dao.databaseConnection;
 import src.dao.receiptDAO;
 import src.dao.storeItemDAO;
+import src.model.outfitGenerator;
 import src.model.Receipt;
 import src.model.StoreItem;
 
@@ -13,15 +14,23 @@ public class mallKioskService
 {
     private storeItemDAO myStoreItemDAO;
     private receiptDAO myReceiptDAO;
+	private outfitGenerator myGenerator;
 
     //Constructor 
     public mallKioskService()
     {
         this.myStoreItemDAO = new storeItemDAO();
         this.myReceiptDAO = new receiptDAO();
+		this.myGenerator = new outfitGenerator();
     }
 
     //Methods
+
+	public List <StoreItem> generateOutfit(String gender, String occasion) {
+		List<StoreItem> filtered = myStoreItemDAO.getItemsFullDataWithFilters(gender, occasion);
+		return myGenerator.generateFullOutfitList(filtered);
+	}
+
     public List<StoreItem> getStoreInfoForItem(int itemId)
     {
         return myStoreItemDAO.getInventoryByItem(itemId);
