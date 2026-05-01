@@ -1,8 +1,10 @@
 package src.service;
 
 import java.util.*;
+import java.sql.*;
 import src.dao.storeItemDAO;
 import src.model.StoreItem;
+import src.dao.databaseConnection;
 import src.app.Main;
 
 

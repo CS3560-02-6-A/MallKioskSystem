@@ -1,5 +1,14 @@
 {
+  "scripts": {
+    "backend:compile": "node scripts/backend-compile.js",
+    "backend:run": "node scripts/backend-run.js",
+    "frontend:dev": "npm run dev --prefix frontend",
+    "start": "npm run backend:compile && concurrently \"npm run backend:run\" \"npm run frontend:dev\""
+  },
   "dependencies": {
     "react-router-dom": "^7.14.2"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
   }
 }
