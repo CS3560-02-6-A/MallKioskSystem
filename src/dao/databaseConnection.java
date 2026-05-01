@@ -1,23 +1,50 @@
 package src.dao;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class databaseConnection 
 {
-    private static final String URL = "jdbc:mysql://localhost:3306/mall_kiosk_system";
-    private static final String USER = "root";
-    private static final String PASSWORD = "Bear&Ponyo1";
-
     public static Connection getConnection() throws SQLException 
     {
-        try {
+        try 
+        {
             Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new SQLException("MySQL JDBC driver not found.", e);
-        }
 
-        return DriverManager.getConnection(URL, USER, PASSWORD);
+            Properties props = new Properties();
+
+            InputStream input = databaseConnection.class
+                    .getClassLoader()
+                    .getResourceAsStream("db.properties");
+
+            if (input == null) 
+            {
+                throw new SQLException("db.properties not found");
+            }
+
+            props.load(input);
+
+            String url = props.getProperty("db.url");
+            String user = props.getProperty("db.user");
+            String password = props.getProperty("db.password");
+
+            if (url == null || user == null || password == null) 
+            {
+                throw new SQLException("Missing db.url, db.user, or db.password in db.properties");
+            }
+
+            return DriverManager.getConnection(url, user, password);
+        } 
+        catch (ClassNotFoundException e) 
+        {
+            throw new SQLException("MySQL JDBC driver not found", e);
+        } 
+        catch (Exception e) 
+        {
+            throw new SQLException("Failed to load database configuration", e);
+        }
     }
 }

@@ -7,22 +7,22 @@ public class Receipt {
 	private LocalDateTime generatedAt;
 	private double totalPrice;
 	public Receipt(int receiptID, int sessionID) {
-		setReceiptID(receiptID);
-		setSessionID(sessionID);
+		this.receiptID = receiptID;
+		this.sessionID = sessionID;
 	}
 	public Receipt(int receiptID, int sessionID, int outfitID, LocalDateTime generatedAt, double totalPrice) {
-		setReceiptID(receiptID);
-		setSessionID(sessionID);
-		setOutfitID(outfitID);
-		setGeneratedAt(generatedAt);
-		setTotalPrice(totalPrice);
+		this.receiptID = receiptID;
+		this.sessionID = sessionID;
+		this.outfitID = outfitID;
+		this.generatedAt = generatedAt;
+		this.totalPrice = totalPrice;
 	}
 	public Receipt(int receiptID, int sessionID, int outfitID, double totalPrice) {
-		setReceiptID(receiptID);
-		setSessionID(sessionID);
-		setOutfitID(outfitID);
-		setGeneratedAt(LocalDateTime.now());
-		setTotalPrice(totalPrice);
+		this.receiptID = receiptID;
+		this.sessionID = sessionID;
+		this.outfitID = outfitID;
+		this.generatedAt = LocalDateTime.now();
+		this.totalPrice = totalPrice;
 	}
 	public void setReceiptID(int receiptID) {this.receiptID = receiptID;}
 	public void setSessionID(int sessionID) {this.sessionID = sessionID;}
