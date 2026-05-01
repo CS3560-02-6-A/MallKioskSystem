@@ -1,19 +1,24 @@
 package src.service;
 
+import java.sql.*;
 import java.util.*;
+import src.dao.databaseConnection;
+import src.dao.receiptDAO;
 import src.dao.storeItemDAO;
+import src.model.Receipt;
 import src.model.StoreItem;
-import src.app.Main;
 
 
 public class mallKioskService 
 {
     private storeItemDAO myStoreItemDAO;
+    private receiptDAO myReceiptDAO;
 
     //Constructor 
     public mallKioskService()
     {
         this.myStoreItemDAO = new storeItemDAO();
+        this.myReceiptDAO = new receiptDAO();
     }
 
     //Methods
@@ -180,8 +185,8 @@ public class mallKioskService
 
         String sql = "SELECT storeID, itemID, inStock, price, aisle FROM inventory_tbl WHERE itemID = ?";
 
-        try (Connection conn = databaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) 
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mall_kiosk", "username", "password");
+             PreparedStatement ps = connection.prepareStatement(sql)) 
             {
 
                 ps.setInt(1, itemID);
@@ -209,153 +214,24 @@ public class mallKioskService
         return inventory;   
     }
     
-    // public List<StoreItem> generateOutfit(String gender, String occasion)
-    // {
-    //     List<StoreItem> candidates = myStoreItemDAO.getItemsByGenderAndOccasion(gender, occasion);
-    //     List<StoreItem> outfit = new ArrayList<>();
+    public Receipt generaReceipt(List<StoreItem> outfit, int sessionID)
+    {
+        double totalPrice = 0.0;
+        for (StoreItem item: outfit)
+        {
+            totalPrice += item.getPrice();
+        }
 
-    //     Map<String, List<StoreItem>> byType = new HashMap<>();
+        //Review constructor for Receipt class: 
+        //public Receipt(int receiptID, int sessionID, int outfitID, double totalPrice)
+        //Because receiptID and outfitID are auto-generated in the database, we can set them to 0.
+        //MySQL will treat this as a signal to generate the next ID.
 
-    //     for(StoreItem item: candidates)
-    //     {
-    //         //Check if the map already has a list for that type. 
-    //         //If yes, use that list. If no, create a new empty list and put it in the map.
+        Receipt receipt = new Receipt(0, sessionID, 0, totalPrice);//still need to figure out where the sessionID come from.
+        myReceiptDAO.saveReceipt(receipt);
+        return receipt;
+    }   
     
-    //         String type = item.getItemType();
-    //         if(!byType.containsKey(type))
-    //         {
-    //             byType.put(type, new ArrayList<>());
-    //         }
-
-    //         byType.get(type).add(item);
-    //     }
-
-    //     //Shuffle up each group of items to avoid picking the same item first. 
-    //     //Purpose is to increase randomness for users. 
-    //     for (List<StoreItem> group: byType.values())
-    //     {
-    //         //Loop through each list of same type items
-    //         //byType.values() gives me the list of all items stores in the map
-    //         //the shuffle function helps me randomly reorders the items inside that list.
-    //         Collections.shuffle(group);
-    //     }
-
-    //     if(occasion.equalsIgnoreCase("formal") && gender.equalsIgnoreCase("women"))
-    //     {
-    //         StoreItem dress = pick(byType, "Dress");
-    //         if(dress != null)
-    //         {
-    //             outfit.add(dress);
-    //         }
-
-    //         StoreItem shirt = pick(byType, "Shirt");
-    //         if(shirt != null)
-    //         {
-    //             outfit.add(shirt);
-    //         }
-
-    //         StoreItem pants = pick(byType, "Pants");
-    //         if(pants != null)
-    //         {
-    //             outfit.add(pants);
-    //         }
-
-    //         StoreItem jacket = pick(byType, "Jacket");
-    //         if(jacket != null)
-    //         {
-    //             outfit.add(jacket);
-    //         }
-
-    //         StoreItem accessory = pick(byType, "Accessory");
-    //         if(accessory != null)
-    //         {
-    //             outfit.add(accessory);
-    //         }
-    //     }
-    //     else if(occasion.equalsIgnoreCase("formal") && gender.equalsIgnoreCase("men"))
-    //     {
-    //         StoreItem shirt = pick(byType, "Shirt");
-    //         if(shirt != null)
-    //         {
-    //             outfit.add(shirt);
-    //         }   
-
-    //         StoreItem pants = pick(byType, "Pants");
-    //         if(pants != null)
-    //         {
-    //             outfit.add(pants);
-    //         }
-
-    //         StoreItem suit = pick(byType, "Suit");
-    //         if(suit != null)
-    //         {
-    //             outfit.add(suit);
-    //         }
-
-    //         StoreItem accessory = pick(byType, "Accessory");
-    //         if(accessory != null)   
-    //         {
-    //             outfit.add(accessory);
-    //         }
-    //     }
-    //     else  
-    //     {
-    //         //Casual - any gender
-    //         StoreItem shirt = pick(byType, "Shirt");
-    //         if(shirt != null)
-    //         {
-    //             outfit.add(shirt);
-    //         }   
-
-    //         StoreItem sweater = pick(byType, "Sweater");
-    //         if(sweater != null)
-    //         {
-    //             outfit.add(sweater);
-    //         }
-
-    //         StoreItem pants = pick(byType, "Pants");
-    //         if(pants != null)
-    //         {
-    //             outfit.add(pants);
-    //         }
-
-    //         StoreItem shorts = pick(byType, "shorts");
-    //         if(shorts != null)
-    //         {
-    //             outfit.add(shorts);
-    //         }
-
-    //         StoreItem loungeWear = pick(byType, "loungeWear");
-    //         if(loungeWear != null)
-    //         {
-    //             outfit.add(loungeWear);
-    //         }
-
-    //         StoreItem accessory = pick(byType, "Accessory");
-    //         if(accessory != null)
-    //         {
-    //             outfit.add(accessory);
-    //         }
-    //     }
-
-    //       return outfit;
-    // }
-   
-   //Helper functions
-   // private StoreItem pick(Map<String, List<StoreItem>> map, String type)
-   // {
-   //      //Look up items by type
-   //      List<StoreItem> group = map.get(type);
-   //      if (group == null || group.isEmpty())
-   //      {
-   //          //Return null if nothing exist. 
-   //          return null;
-   //      }
-   //      //If any exist, we will take the first one.
-   //      return group.get(0);
-   // }
-
-
     
     
 }
