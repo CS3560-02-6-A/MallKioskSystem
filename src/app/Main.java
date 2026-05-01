@@ -49,6 +49,9 @@ public class Main
         //Testing for getting all items with full data paramaters, filtered.
         // System.out.println("Testing for getting all items with full data paramaters, filtered.");
         // List<StoreItem> filteredItems = dao.getItemsFullDataWithFilters("men", null);
+      
+        System.out.println("Testing for getting all items with full data paramaters, filtered.");
+        List<StoreItem> filteredItems = dao.getItemsFullDataWithFilters("women", "formal");
 
         // for (StoreItem i : filteredItems) 
         // {
