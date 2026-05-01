@@ -3,6 +3,7 @@ package src.service;
 import java.util.*;
 import src.dao.storeItemDAO;
 import src.model.StoreItem;
+import src.app.Main;
 
 
 public class mallKioskService 
