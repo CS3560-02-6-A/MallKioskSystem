@@ -1,8 +1,10 @@
 import { theme } from "../../styles/theme";
+import { useNavigate } from "react-router-dom";
 
 export default function EndSessionButton({ style = {}, ...props }) {
+  const navigate = useNavigate();
   const handleEndSession = () => {
-    window.location.assign("/");
+    navigate("/");
   };
 
   //OnClick -- Clear local storage, redirect to home page
