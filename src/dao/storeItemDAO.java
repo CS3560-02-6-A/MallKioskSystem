@@ -83,6 +83,7 @@ public class storeItemDAO {
  public List<StoreItem> getItemsFullDataWithFilters(String gender, String occasion) {
     List<StoreItem> items = new ArrayList<>();
 
+    
     String sql = "SELECT si.storeID, si.itemID, si.inStock, si.price, si.aisle, " +
                  "i.name, i.type, i.color, i.gender, i.occasion " +
                  "FROM inventory_tbl si " +
