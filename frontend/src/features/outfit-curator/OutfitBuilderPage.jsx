@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { theme } from "../../styles/theme";
 import HeaderBar from "../../components/ui/HeaderBar";
 import AppButton from "../../components/ui/AppButton";
-import OutfitCategoryCard from "../../components/ui/OutfitCategoryCard";
+import OutfitCategoryCard from "./components/OutfitCategoryCard";
 
 
 const CATEGORIES = [
