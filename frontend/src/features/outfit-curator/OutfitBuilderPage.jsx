@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { theme } from "../../styles/theme";
 import HeaderBar from "../../components/ui/HeaderBar";
 import AppButton from "../../components/ui/AppButton";
+import OutfitCategoryCard from "./components/OutfitCategoryCard";
 
 
 const CATEGORIES = [
@@ -24,7 +25,7 @@ export default function OutfitBuilderPage() {
         width: "100%",
         display: "flex",
         flexDirection: "column",
-        overflow: "hidden",
+        overflow: "scroll", //to view more outfit category cards
         background: theme.colors.page,
         color: theme.colors.text,
         fontFamily: theme.fonts.sans,
@@ -155,6 +156,8 @@ export default function OutfitBuilderPage() {
             >
               Create your outfit!
             </h2>
+          <OutfitCategoryCard item={{ imageSrc:"https://tse4.mm.bing.net/th/id/OIP.FjDmhFMdZS5dfyr7eDD25AHaHa?pid=Api&h=220&P=0", name: "Red T-Shirt", type: "Top", color: "Red", gender: "Men",price: 25.99, storeId: 1, aisle: "A4" }} />
+          <OutfitCategoryCard item={{ imageSrc: "https://lsco.scene7.com/is/image/lsco/005013737-front-pdp-ld?fmt=jpeg&qlt=70&resMode=sharp2&fit=crop,1&op_usm=0.6,0.6,8&wid=2000&hei=2500",name: "Blue Jeans", type: "Bottom", color: "Dark Blue", gender: "Women", price: 49.99, storeId: 15, aisle: "D5" }} />
           </div>
 
           {/* Lower content area (future images go here) */}
