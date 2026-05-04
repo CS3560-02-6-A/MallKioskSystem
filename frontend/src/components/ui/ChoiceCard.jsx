@@ -30,12 +30,12 @@ export default function ChoiceCard({
         src={selected && selectedImageSrc ? selectedImageSrc : imageSrc}
         alt={alt}
         style={{
-          width: "318px",
+          width: "300px",
           maxWidth: "min(28vw, 424px)",
           maxHeight: "544px",
-          height: "408px",
+          height: "390px",
           objectFit: "contain",
-          display: "block",
+          display: "flex",
           ...imageStyle,
         }}
       />

@@ -1,17 +1,10 @@
 package src.app;
 
-import java.sql.ResultSet;
 import java.util.List;
-import src.dao.itemDAO;
 import src.dao.storeItemDAO;
+import src.model.Receipt;
 import src.model.StoreItem;
-import src.model.Item;
-import src.dao.storeDAO;
-import src.model.Store;
 import src.model.outfitGenerator;
-import java.sql.Connection;
-import java.sql.Statement;
-import src.dao.databaseConnection;
 import src.service.mallKioskService;
 
 public class Main 
@@ -19,15 +12,45 @@ public class Main
     public static void main(String[] args) 
     {
         System.out.println("BEGIN MAIN TESTING");
+
+        mallKioskService service = new mallKioskService();
+        outfitGenerator generator = new outfitGenerator();
+        storeItemDAO dao = new storeItemDAO();
+
+        List<StoreItem> outfit = service.generateOutfit("women", null);
+        
+          for (StoreItem i : outfit)
+        {
+            System.out.println(
+               "Name: " + i.getItemName() +
+            " | Type: " + i.getItemType() +
+            " | Color: " + i.getItemColor() +
+            " | Gender: " + i.getGender() +
+            " | Occasion: " + i.getOccasion() +
+            " | StoreID: " + i.getStoreId() +
+            " | ItemID: " + i.getItemId() +
+            " | Price: $" + i.getPrice() +
+            " | InStock: " + i.isInStock() +
+            " | Aisle: " + i.getAisle()
+            );
+        }
+
+        Receipt receipt = service.generaReceipt(outfit, 1);
+        System.out.println("Receipt total: $" + receipt.getTotalPrice() + " | Generated at: " + receipt.getGeneratedAt());
+
+
+
+
         // System.out.println("TESTING storeItemDAO...");
         // storeItemDAO dao = new storeItemDAO();
         
 
         //Testing for getting all items with full data paramaters, filtered.
         // System.out.println("Testing for getting all items with full data paramaters, filtered.");
-        
-        mallKioskService service = new mallKioskService();
-        List<StoreItem> outfit = service.generateOutfit(null, null);
+        // List<StoreItem> filteredItems = dao.getItemsFullDataWithFilters("men", null);
+      
+        System.out.println("Testing for getting all items with full data paramaters, filtered.");
+        List<StoreItem> filteredItems = dao.getItemsFullDataWithFilters("women", "formal");
 
         for (StoreItem i : outfit) 
         {
