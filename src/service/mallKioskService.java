@@ -4,6 +4,13 @@ import java.util.*;
 import src.dao.storeItemDAO;
 import src.model.StoreItem;
 import src.app.Main;
+import src.model.Receipt;
+import src.dao.databaseConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import src.model.outfitGenerator;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 public class mallKioskService 
@@ -16,80 +23,99 @@ public class mallKioskService
         this.myStoreItemDAO = new storeItemDAO();
     }
 
+    public List<StoreItem> generateOutfit(String gender, String occasion)
+    {
+        List<StoreItem> fullFilteredSet = getItemsFullDataWithFilters(gender, occasion);
+        outfitGenerator generator = new outfitGenerator();
+        return generator.generateFullOutfitList(fullFilteredSet);
+    }
+
+    public Receipt generateReceipt(List<StoreItem> outfit)
+    {
+        double totalPrice = 0.0;
+        for(StoreItem item: outfit)
+        {
+            totalPrice += item.getPrice();
+        }
+
+        //For now, we will just return a receipt with dummy data. 
+        return new Receipt(1, 1, 1, totalPrice);
+    }
+
     //Methods
     public List<StoreItem> getStoreInfoForItem(int itemId)
     {
         return myStoreItemDAO.getInventoryByItem(itemId);
     }
 
-    public List<StoreItem> getAllItems()
-    {
-        List<StoreItem> inventory = new ArrayList<>();
-        String sql = "SELECT * FROM inventory_tbl";
-        try (Connection conn = databaseConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+    // public List<StoreItem> getAllItems()
+    // {
+    //     List<StoreItem> inventory = new ArrayList<>();
+    //     String sql = "SELECT * FROM inventory_tbl";
+    //     try (Connection conn = databaseConnection.getConnection();
+    //          Statement stmt = conn.createStatement();
+    //          ResultSet rs = stmt.executeQuery(sql)) {
 
-            while (rs.next()) {
-                StoreItem inItem = new StoreItem(
-                    rs.getInt("storeID"),
-                    rs.getInt("itemID"),
-                    rs.getBoolean("inStock"),
-                    rs.getDouble("price"),
-                    rs.getString("aisle")
-                );
-                inventory.add(inItem);
-            }
+    //         while (rs.next()) {
+    //             StoreItem inItem = new StoreItem(
+    //                 rs.getInt("storeID"),
+    //                 rs.getInt("itemID"),
+    //                 rs.getBoolean("inStock"),
+    //                 rs.getDouble("price"),
+    //                 rs.getString("aisle")
+    //             );
+    //             inventory.add(inItem);
+    //         }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    //     } catch (SQLException e) {
+    //         e.printStackTrace();
+    //     }
 
-        return inventory;
+    //     return inventory;
         
-    }
+    // }
 
-    public List<StoreItem> getItemsFullData() 
-    {
-        List<StoreItem> items = new ArrayList<>();
+//     public List<StoreItem> getItemsFullData() 
+//     {
+//         List<StoreItem> items = new ArrayList<>();
     
-        String sql = "SELECT si.storeID, si.itemID, si.inStock, si.price, si.aisle, " +
-                     "i.name, i.type, i.color, i.gender, i.occasion " +
-                     "FROM inventory_tbl si " +
-                     "JOIN items_tbl i ON si.itemID = i.ID " + 
-                     "WHERE si.inStock = true"
-                     ;
+//         String sql = "SELECT si.storeID, si.itemID, si.inStock, si.price, si.aisle, " +
+//                      "i.name, i.type, i.color, i.gender, i.occasion " +
+//                      "FROM inventory_tbl si " +
+//                      "JOIN items_tbl i ON si.itemID = i.ID " + 
+//                      "WHERE si.inStock = true"
+//                      ;
     
-        try (Connection conn = databaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) 
-        {
+//         try (Connection conn = databaseConnection.getConnection();
+//              PreparedStatement ps = conn.prepareStatement(sql);
+//              ResultSet rs = ps.executeQuery()) 
+//         {
     
-            while (rs.next()) 
-            {
-                StoreItem item = new StoreItem(
-                    rs.getInt("storeID"),
-                    rs.getInt("itemID"),
-                    rs.getBoolean("inStock"),
-                    rs.getDouble("price"),
-                    rs.getString("aisle"),
-                    rs.getString("name"),
-                    rs.getString("type"),
-                    rs.getString("color"),
-                    rs.getString("gender"),
-                    rs.getString("occasion")
-                );
-                items.add(item);
-            }
+//             while (rs.next()) 
+//             {
+//                 StoreItem item = new StoreItem(
+//                     rs.getInt("storeID"),
+//                     rs.getInt("itemID"),
+//                     rs.getBoolean("inStock"),
+//                     rs.getDouble("price"),
+//                     rs.getString("aisle"),
+//                     rs.getString("name"),
+//                     rs.getString("type"),
+//                     rs.getString("color"),
+//                     rs.getString("gender"),
+//                     rs.getString("occasion")
+//                 );
+//                 items.add(item);
+//             }
 
-        } 
-         catch (SQLException e) 
-        {
-        e.printStackTrace();
-        }
+//         } 
+//          catch (SQLException e) 
+//         {
+//         e.printStackTrace();
+//         }
 
-    return items;
-}
+//     return items;
+// }
 
     public List<StoreItem> getItemsFullDataWithFilters(String gender, String occasion) {
     List<StoreItem> items = new ArrayList<>();

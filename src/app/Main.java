@@ -12,35 +12,38 @@ import src.model.outfitGenerator;
 import java.sql.Connection;
 import java.sql.Statement;
 import src.dao.databaseConnection;
+import src.service.mallKioskService;
 
 public class Main 
 {
     public static void main(String[] args) 
     {
         System.out.println("BEGIN MAIN TESTING");
-        System.out.println("TESTING storeItemDAO...");
-        storeItemDAO dao = new storeItemDAO();
+        // System.out.println("TESTING storeItemDAO...");
+        // storeItemDAO dao = new storeItemDAO();
         
 
         //Testing for getting all items with full data paramaters, filtered.
-        System.out.println("Testing for getting all items with full data paramaters, filtered.");
-        List<StoreItem> filteredItems = dao.getItemsFullDataWithFilters("women", "formal");
+        // System.out.println("Testing for getting all items with full data paramaters, filtered.");
+        
+        mallKioskService service = new mallKioskService();
+        List<StoreItem> outfit = service.generateOutfit(null, null);
 
-        // for (StoreItem i : filteredItems) 
-        // {
-        //     System.out.println(
-        //        "Name: " + i.getItemName() +
-        //     " | Type: " + i.getItemType() +
-        //     " | Color: " + i.getItemColor() +
-        //     " | Gender: " + i.getGender() +
-        //     " | Occasion: " + i.getOccasion() +
-        //     " | StoreID: " + i.getStoreId() +
-        //     " | ItemID: " + i.getItemId() +
-        //     " | Price: $" + i.getPrice() +
-        //     " | InStock: " + i.isInStock() +
-        //     " | Aisle: " + i.getAisle()
-        //     );
-        // }
+        for (StoreItem i : outfit) 
+        {
+            System.out.println(
+               "Name: " + i.getItemName() +
+            " | Type: " + i.getItemType() +
+            " | Color: " + i.getItemColor() +
+            " | Gender: " + i.getGender() +
+            " | Occasion: " + i.getOccasion() +
+            " | StoreID: " + i.getStoreId() +
+            " | ItemID: " + i.getItemId() +
+            " | Price: $" + i.getPrice() +
+            " | InStock: " + i.isInStock() +
+            " | Aisle: " + i.getAisle()
+            );
+        }
 
     //  try (Connection conn = databaseConnection.getConnection();
     //          Statement s = conn.createStatement();
@@ -60,25 +63,25 @@ public class Main
 
 
         // Testing for getting just accessories with full data paramaters, filtered.
-        System.out.println("Testing for getting just accessories with full data paramaters, filtered.");
-        outfitGenerator generator = new outfitGenerator();
-        List<StoreItem> outfit = generator.generateFullOutfitList(filteredItems);
+        // System.out.println("Testing for getting just accessories with full data paramaters, filtered.");
+        // outfitGenerator generator = new outfitGenerator();
+        // List<StoreItem> outfit = generator.generateFullOutfitList(filteredItems);
         
-          for (StoreItem i : outfit)
-        {
-            System.out.println(
-               "Name: " + i.getItemName() +
-            " | Type: " + i.getItemType() +
-            " | Color: " + i.getItemColor() +
-            " | Gender: " + i.getGender() +
-            " | Occasion: " + i.getOccasion() +
-            " | StoreID: " + i.getStoreId() +
-            " | ItemID: " + i.getItemId() +
-            " | Price: $" + i.getPrice() +
-            " | InStock: " + i.isInStock() +
-            " | Aisle: " + i.getAisle()
-            );
-        }
+        //   for (StoreItem i : outfit)
+        // {
+        //     System.out.println(
+        //        "Name: " + i.getItemName() +
+        //     " | Type: " + i.getItemType() +
+        //     " | Color: " + i.getItemColor() +
+        //     " | Gender: " + i.getGender() +
+        //     " | Occasion: " + i.getOccasion() +
+        //     " | StoreID: " + i.getStoreId() +
+        //     " | ItemID: " + i.getItemId() +
+        //     " | Price: $" + i.getPrice() +
+        //     " | InStock: " + i.isInStock() +
+        //     " | Aisle: " + i.getAisle()
+        //     );
+        // }
 
         //TESTING FOR storeDAO
         // System.out.println("TESTING FOR storeDAO...");
@@ -93,4 +96,5 @@ public class Main
         // }
 
     }
-}
+
+    }
