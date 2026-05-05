@@ -78,7 +78,7 @@ export default function OccasionPage() {
                     }}
                 >
                     <OccasionTile
-                    options={["Formal", "Casual", "Indecisive"]} //add more options here
+                    options={["Formal", "Casual", "No Preference"]} //add more options here
                     onSelect={(label) => {
                         console.log("Selected occasion:", label);
                         setSelectedOccasion(label.toLowerCase());
