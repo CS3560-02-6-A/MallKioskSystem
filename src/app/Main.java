@@ -19,6 +19,7 @@ public class Main
 
         List<StoreItem> outfit = service.generateOutfit("women", null);
         
+        
           for (StoreItem i : outfit)
         {
             System.out.println(
@@ -49,24 +50,24 @@ public class Main
         // System.out.println("Testing for getting all items with full data paramaters, filtered.");
         // List<StoreItem> filteredItems = dao.getItemsFullDataWithFilters("men", null);
       
-        System.out.println("Testing for getting all items with full data paramaters, filtered.");
-        List<StoreItem> filteredItems = dao.getItemsFullDataWithFilters("women", "formal");
+        // System.out.println("Testing for getting all items with full data paramaters, filtered.");
+        // List<StoreItem> filteredItems = dao.getItemsFullDataWithFilters("women", "formal");
 
-        for (StoreItem i : outfit) 
-        {
-            System.out.println(
-               "Name: " + i.getItemName() +
-            " | Type: " + i.getItemType() +
-            " | Color: " + i.getItemColor() +
-            " | Gender: " + i.getGender() +
-            " | Occasion: " + i.getOccasion() +
-            " | StoreID: " + i.getStoreId() +
-            " | ItemID: " + i.getItemId() +
-            " | Price: $" + i.getPrice() +
-            " | InStock: " + i.isInStock() +
-            " | Aisle: " + i.getAisle()
-            );
-        }
+        // for (StoreItem i : outfit) 
+        // {
+        //     System.out.println(
+        //        "Name: " + i.getItemName() +
+        //     " | Type: " + i.getItemType() +
+        //     " | Color: " + i.getItemColor() +
+        //     " | Gender: " + i.getGender() +
+        //     " | Occasion: " + i.getOccasion() +
+        //     " | StoreID: " + i.getStoreId() +
+        //     " | ItemID: " + i.getItemId() +
+        //     " | Price: $" + i.getPrice() +
+        //     " | InStock: " + i.isInStock() +
+        //     " | Aisle: " + i.getAisle()
+        //     );
+        // }
 
     //  try (Connection conn = databaseConnection.getConnection();
     //          Statement s = conn.createStatement();

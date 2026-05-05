@@ -45,10 +45,10 @@ public class mallKioskService
 
     //Methods
 
-	public List <StoreItem> generateOutfit(String gender, String occasion) {
-		List<StoreItem> filtered = myStoreItemDAO.getItemsFullDataWithFilters(gender, occasion);
-		return myGenerator.generateFullOutfitList(filtered);
-	}
+	// public List <StoreItem> generateOutfit(String gender, String occasion) {
+	// 	List<StoreItem> filtered = myStoreItemDAO.getItemsFullDataWithFilters(gender, occasion);
+	// 	return myGenerator.generateFullOutfitList(filtered);
+	// }
 
     public List<StoreItem> getStoreInfoForItem(int itemId)
     {

@@ -1,22 +1,54 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { theme } from "../../styles/theme";
 import HeaderBar from "../../components/ui/HeaderBar";
 import AppButton from "../../components/ui/AppButton";
 import OutfitCategoryCard from "./components/OutfitCategoryCard";
 
-
 const CATEGORIES = [
   { label: "Accessories", height: "120px" },
-  { label: "Top",         height: "200px" },
-  { label: "Bottom",      height: "340px" },
-  { label: "Shoes",       height: "150px" },
+  { label: "Top", height: "200px" },
+  { label: "Bottom", height: "340px" },
+  { label: "Shoes", height: "150px" },
 ];
 
 export default function OutfitBuilderPage() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const occasion = searchParams.get("occasion");
+
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const filledCount = 0;
+  const [outfit, setOutfit] = useState([]);
+
+  const filledCount = outfit.length;
+
+  async function fetchOutfit() {
+    try {
+      const params = new URLSearchParams();
+
+      if (occasion) {
+        params.append("occasion", occasion);
+      }
+
+      const url = `http://localhost:8080/api/outfit?${params.toString()}`;
+
+      console.log("Fetching outfit from:", url);
+
+      const res = await fetch(url);
+      const data = await res.json();
+
+      console.log("Received outfit:", data);
+
+      setOutfit(data);
+    } catch (error) {
+      console.error("Failed to fetch outfit:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchOutfit();
+  }, [occasion]);
 
   return (
     <main
@@ -25,7 +57,7 @@ export default function OutfitBuilderPage() {
         width: "100%",
         display: "flex",
         flexDirection: "column",
-        overflow: "scroll", //to view more outfit category cards
+        overflow: "scroll",
         background: theme.colors.page,
         color: theme.colors.text,
         fontFamily: theme.fonts.sans,
@@ -56,6 +88,7 @@ export default function OutfitBuilderPage() {
           minHeight: 0,
         }}
       >
+        {/* Left side category buttons */}
         <div
           style={{
             display: "flex",
@@ -67,7 +100,6 @@ export default function OutfitBuilderPage() {
             padding: "8px 10px 16px 10px",
           }}
         >
-          {/* Counter */}
           <p
             style={{
               textAlign: "right",
@@ -81,7 +113,6 @@ export default function OutfitBuilderPage() {
             {filledCount}/{CATEGORIES.length} items
           </p>
 
-          {/* Category boxes */}
           <div
             style={{
               display: "flex",
@@ -92,7 +123,7 @@ export default function OutfitBuilderPage() {
           >
             {CATEGORIES.map((cat) => {
               const isSelected = selectedCategory === cat.label;
-              
+
               return (
                 <button
                   key={cat.label}
@@ -106,10 +137,10 @@ export default function OutfitBuilderPage() {
                     width: "50%",
                     height: cat.height,
                     borderRadius: "12px",
-                    border: isSelected
-                      ? `2px solid ${theme.colors.lightBrown}`
-                      : `2px solid ${theme.colors.lightBrown}`,
-                    background: isSelected ? theme.colors.tan : theme.colors.palePink,
+                    border: `2px solid ${theme.colors.lightBrown}`,
+                    background: isSelected
+                      ? theme.colors.tan
+                      : theme.colors.palePink,
                     cursor: "pointer",
                     fontFamily: theme.fonts.sans,
                     fontSize: theme.fontSizes.onboardingTagline,
@@ -125,7 +156,7 @@ export default function OutfitBuilderPage() {
           </div>
         </div>
 
-        {/* Right — outfit canvas */}
+        {/* Right side outfit area */}
         <div
           style={{
             display: "flex",
@@ -136,7 +167,6 @@ export default function OutfitBuilderPage() {
             boxShadow: theme.shadows.dropShadow,
           }}
         >
-          {/* Top banner */}
           <div
             style={{
               width: "100%",
@@ -156,24 +186,21 @@ export default function OutfitBuilderPage() {
             >
               Create your outfit!
             </h2>
-          <OutfitCategoryCard item={{ imageSrc:"https://tse4.mm.bing.net/th/id/OIP.FjDmhFMdZS5dfyr7eDD25AHaHa?pid=Api&h=220&P=0", name: "Red T-Shirt", type: "Top", color: "Red", gender: "Men",price: 25.99, storeId: 1, aisle: "A4" }} />
-          <OutfitCategoryCard item={{ imageSrc: "https://lsco.scene7.com/is/image/lsco/005013737-front-pdp-ld?fmt=jpeg&qlt=70&resMode=sharp2&fit=crop,1&op_usm=0.6,0.6,8&wid=2000&hei=2500",name: "Blue Jeans", type: "Bottom", color: "Dark Blue", gender: "Women", price: 49.99, storeId: 15, aisle: "D5" }} />
           </div>
 
-          {/* Lower content area (future images go here) */}
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              justifyContent: "center",
+              justifyContent: outfit.length > 0 ? "flex-start" : "center",
               gap: "30px",
               flex: 1,
               overflow: "auto",
               padding: "16px",
             }}
           >
-            {selectedCategory === null && (
+            {outfit.length === 0 && (
               <>
                 <p
                   style={{
@@ -183,20 +210,41 @@ export default function OutfitBuilderPage() {
                     margin: 0,
                   }}
                 >
-                  Select a box to edit your outfit.
+                  No outfit generated yet.
                 </p>
-                <p
-                  style={{
-                    fontFamily: theme.fonts.sans,
-                    fontSize: theme.fontSizes.onboardingTagline,
-                    color: theme.colors.mutedText,
-                    margin: 0,
-                  }}
-                >
-                  OR
-                </p>
-                <AppButton>Generate Random Outfit</AppButton>
+
+                <AppButton onClick={fetchOutfit}>
+                  Generate Random Outfit
+                </AppButton>
               </>
+            )}
+
+            {outfit.map((item) => (
+              <OutfitCategoryCard
+                key={`${item.itemId}-${item.storeId}`}
+                item={{
+                  imageSrc: item.imagePath || "",
+                  name: item.name,
+                  type: item.type,
+                  color: item.color,
+                  gender: item.gender,
+                  price: item.price,
+                  storeId: item.storeId,
+                  aisle: item.aisle,
+                }}
+              />
+            ))}
+
+            {outfit.length > 0 && (
+              <AppButton onClick={fetchOutfit}>
+                Generate New Outfit
+              </AppButton>
+            )}
+
+            {outfit.length > 0 && (
+              <AppButton onClick={() => navigate("/receipt")}>
+                Finish Outfit
+              </AppButton>
             )}
           </div>
         </div>

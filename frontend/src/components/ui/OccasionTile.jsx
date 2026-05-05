@@ -7,6 +7,8 @@ export default function OccasionTile({ options = [], onSelect, style = {} }) {
   const handleSelect = (index) => {
     setSelectedIndex(index);
     if (onSelect) onSelect(options[index], index);
+    console.log("OccasionTile options:", options);
+    console.log("OccasionTile selected index:", index);
   };
 
   return (

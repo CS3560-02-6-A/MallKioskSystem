@@ -8,8 +8,7 @@ import OccasionTile from "../../components/ui/OccasionTile";
 
 export default function OccasionPage() {
     const navigate = useNavigate();
-    const [selectedShopper, setSelectedShopper] = useState(null);
-
+    const [selectedOccasion, setSelectedOccasion] = useState(null);
   return (
         <main
             style={{
@@ -79,15 +78,22 @@ export default function OccasionPage() {
                     }}
                 >
                     <OccasionTile
-                    options={["Beach", "Work", "Casual", ]} //add more options here
-                    onSelect={(label, index) => setSelectedShopper(index)}
+                    options={["Formal", "Casual", "Indecisive"]} //add more options here
+                    onSelect={(label) => {
+                        console.log("Selected occasion:", label);
+                        setSelectedOccasion(label.toLowerCase());
+                    }}                    
                     style={{ width: "100%" }}
                     />
                     <AppButton
-                        disabled={selectedShopper === null}
-                        onClick={() => (selectedShopper !== null ? navigate("/builder") : null)}
+                    disabled={selectedOccasion === null}
+                    onClick={() =>
+                        selectedOccasion !== null
+                        ? navigate(`/builder?occasion=${selectedOccasion}`)
+                        : null
+                    }
                     >
-                        Continue
+                    Continue
                     </AppButton>
                 </section>
             </section>
