@@ -6,7 +6,7 @@ import AppButton from "../../components/ui/AppButton";
 import OutfitCategoryCard from "./components/OutfitCategoryCard";
 
 const CATEGORIES = [
-  { label: "Accessories", flexGrow: 1, types: ["accessory", "jacket", "sweater"] },
+  { label: "Accessories", flexGrow: 1, types: ["accessory", "jacket", "sweater", "robe"] },
   { label: "Top",         flexGrow: 1, types: ["shirt"] },
   { label: "Bottom",      flexGrow: 1.6, types: ["pants", "skirt", "shorts"] },
   { label: "Shoes",       flexGrow: 0.5, types: ["heels", "sandals", "sneakers", "dressshoe", "shoes"] },

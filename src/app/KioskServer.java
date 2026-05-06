@@ -81,6 +81,14 @@ public class KioskServer
                 }
             }
 
+            // treat "neutral" / "no preference" as no filter
+            if (gender != null && gender.equalsIgnoreCase("neutral")) {
+                gender = null;
+            }
+            if (occasion != null && occasion.equalsIgnoreCase("no preference")) {
+                occasion = null;
+            }
+
             List<StoreItem> outfit = service.generateOutfit(gender, occasion);
              for (StoreItem i : outfit) 
         {
@@ -124,6 +132,14 @@ public class KioskServer
                         if (kv[0].equals("occasion")) occasion = URLDecoder.decode(kv[1], StandardCharsets.UTF_8);
                     }
                 }
+            }
+
+                        // treat "neutral" / "no preference" as no filter
+            if (gender != null && gender.equalsIgnoreCase("neutral")) {
+                gender = null;
+            }
+            if (occasion != null && occasion.equalsIgnoreCase("no preference")) {
+                occasion = null;
             }
 
             List<StoreItem> outfit = service.generateOutfit(gender, occasion);

@@ -4,6 +4,8 @@ export default function OutfitCategoryCard({ item, category, onSelectItem, isSel
     if (!item) return null;
     return (
         <div
+            type="button"
+            aria-pressed={isSelected}
             onClick={() => onSelectItem(category, item)}
             style={{
                 backgroundColor: theme.colors.offWhite,

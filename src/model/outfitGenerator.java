@@ -9,28 +9,27 @@ import java.util.Random;
 public class outfitGenerator {
 
     public List<StoreItem> getAccessoryList(List<StoreItem> items) {
-            List<StoreItem> accessoryList = new ArrayList<StoreItem>();
-            for (StoreItem item : items) {
-                if (item.getItemType().equalsIgnoreCase("accessory") ||
-                    item.getItemType().equalsIgnoreCase("jacket") ||
-                    item.getItemType().equalsIgnoreCase("sweater")) {
-                    accessoryList.add(item);
-                }
+        List<StoreItem> accessoryList = new ArrayList<StoreItem>();
+        for (StoreItem item : items) {
+            if (item.getItemType().equalsIgnoreCase("accessory") ||
+                item.getItemType().equalsIgnoreCase("jacket") ||
+                item.getItemType().equalsIgnoreCase("sweater") ||
+                item.getItemType().equalsIgnoreCase("robe")) {
+                accessoryList.add(item);
             }
-            return accessoryList;
+        }
+        return accessoryList;
     }
 
     public List<StoreItem> getTopsList(List<StoreItem> items) {
-            List<StoreItem> topsList = new ArrayList<StoreItem>();
-            for (StoreItem item : items) {
-                if (item.getItemType().equalsIgnoreCase("Shirt") ||
-                    item.getItemType().equalsIgnoreCase("Dress") ||
-                    item.getItemType().equalsIgnoreCase("Suit") ||
-                    item.getItemType().equalsIgnoreCase("Robe")) {
-                    topsList.add(item);
-                }
+        List<StoreItem> topsList = new ArrayList<StoreItem>();
+        for (StoreItem item : items) {
+            if (item.getItemType().equalsIgnoreCase("Shirt")) {
+                topsList.add(item);
             }
             return topsList;
+        }
+        return topsList;
     }
 
       public List<StoreItem> getBottomsList(List<StoreItem> items) {
