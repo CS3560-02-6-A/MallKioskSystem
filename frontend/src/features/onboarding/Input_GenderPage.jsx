@@ -116,7 +116,7 @@ export default function Input_GenderPage() {
             >
                 <AppButton
                     disabled={!selectedShopper}
-                    onClick={() => selectedShopper ? navigate("/occasion") : null}
+                    onClick={() => selectedShopper ? navigate(`/occasion?gender=${selectedShopper}`) : null}
                 >
                     Continue 
                 </AppButton>
