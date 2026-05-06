@@ -1,5 +1,5 @@
 import { theme } from "../../styles/theme";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import HeaderBar from "../../components/ui/HeaderBar";
 import ProgressBar from "../../components/ui/ProgressBar";
@@ -8,6 +8,8 @@ import OccasionTile from "../../components/ui/OccasionTile";
 
 export default function OccasionPage() {
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const gender = searchParams.get("gender");
     const [selectedOccasion, setSelectedOccasion] = useState(null);
   return (
         <main
@@ -89,7 +91,7 @@ export default function OccasionPage() {
                     disabled={selectedOccasion === null}
                     onClick={() =>
                         selectedOccasion !== null
-                        ? navigate(`/builder?occasion=${selectedOccasion}`)
+                        ? navigate(`/builder?occasion=${selectedOccasion}&gender=${gender}`)
                         : null
                     }
                     >

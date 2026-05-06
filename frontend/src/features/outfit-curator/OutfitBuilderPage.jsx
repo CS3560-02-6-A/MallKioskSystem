@@ -17,6 +17,7 @@ export default function OutfitBuilderPage() {
   const [searchParams] = useSearchParams();
 
   const occasion = searchParams.get("occasion");
+  const gender = searchParams.get("gender");
 
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [outfit, setOutfit] = useState([]);
@@ -29,6 +30,9 @@ export default function OutfitBuilderPage() {
 
       if (occasion) {
         params.append("occasion", occasion);
+      }
+      if (gender) {
+        params.append("gender", gender);
       }
 
       const url = `http://localhost:8080/api/outfit?${params.toString()}`;

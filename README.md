@@ -133,3 +133,19 @@ NOTES FOR RUNNING ON PC:
 
 4. (Optional) Import data:
    mysql -u root -p mall_kiosk_system < database/fullKioskTableData.sql
+   
+-------------
+Have two terminals open
+In 1st terminal, cd to /MallKioskSystem/frontend and use
+''npm install''
+follow by
+''npm run dev''
+
+In the 2nd terminal:
+
+Recompile HTTP Server with
+javac -cp ".:src:./lib/mysql-connector-j-9.7.0.jar" $(find src -name "*.java")
+
+Start the HTTP server
+java -cp ".:src:./lib/mysql-connector-j-9.7.0.jar" src.app.KioskServer
+-------------
