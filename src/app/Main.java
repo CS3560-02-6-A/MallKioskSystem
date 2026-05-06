@@ -36,7 +36,7 @@ public class Main
             );
         }
 
-        Receipt receipt = service.generaReceipt(outfit, 1);
+        Receipt receipt = service.generateReceipt(outfit, 1);
         System.out.println("Receipt total: $" + receipt.getTotalPrice() + " | Generated at: " + receipt.getGeneratedAt());
 
 
