@@ -21,6 +21,45 @@ public class KioskServer
 
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
+        // GET /api/items?gender=women&occasion=casual  — returns full filtered catalog
+        server.createContext("/api/items", exchange -> {
+            addCors(exchange);
+            if ("OPTIONS".equals(exchange.getRequestMethod())) {
+                exchange.sendResponseHeaders(204, -1);
+                return;
+            }
+
+            String query = exchange.getRequestURI().getQuery();
+            String gender = null, occasion = null;
+
+            if (query != null) {
+                for (String param : query.split("&")) {
+                    String[] kv = param.split("=", 2);
+                    if (kv.length == 2) {
+                        if (kv[0].equals("gender"))   gender   = URLDecoder.decode(kv[1], StandardCharsets.UTF_8);
+                        if (kv[0].equals("occasion")) occasion = URLDecoder.decode(kv[1], StandardCharsets.UTF_8);
+                    }
+                }
+            }
+
+            // treat "neutral" / "no preference" as no filter
+            if (gender != null && gender.equalsIgnoreCase("neutral")) {
+                gender = null;
+            }
+            if (occasion != null && occasion.equalsIgnoreCase("no preference")) {
+                occasion = null;
+            }
+
+            List<StoreItem> items = service.getItemsFullDataWithFilters(gender, occasion);
+            String json = outfitToJson(items);
+
+            exchange.getResponseHeaders().set("Content-Type", "application/json");
+            byte[] bytes = json.getBytes();
+            exchange.sendResponseHeaders(200, bytes.length);
+            exchange.getResponseBody().write(bytes);
+            exchange.getResponseBody().close();
+        });
+
         // GET /api/outfit?gender=women&occasion=casual
         server.createContext("/api/outfit", exchange -> {
             addCors(exchange);
