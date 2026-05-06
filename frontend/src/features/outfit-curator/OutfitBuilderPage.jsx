@@ -323,7 +323,9 @@ export default function OutfitBuilderPage() {
               />
             ))}
 
-            <AppButton onClick={() => navigate("/receipt")}>Finish Outfit</AppButton>
+            <AppButton onClick={() => navigate("/receipt", { state: { outfit } })}>
+                Finish Outfit
+            </AppButton>
           </div>
         </div>
       </div>

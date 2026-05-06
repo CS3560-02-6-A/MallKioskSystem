@@ -6,12 +6,15 @@ import ReceiptCard from "./components/ReceiptCard";
 import ReceiptSaveSection from "./components/ReceiptSaveSection";
 import HeaderBar from "../../components/ui/HeaderBar";
 import { mockOutfitItems } from "./mockData";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../../styles/theme";
 import "./ReceiptPage.css";
 
 
 export default function ReceiptPage() {
+  const location = useLocation();
+  const outfitItems = location.state?.outfit ?? mockOutfitItems;
+
   return (
     <main className="receipt-page">
 
@@ -31,7 +34,7 @@ export default function ReceiptPage() {
 
       {/* The main content: left = reciept, right = qr code area) */}
       <section className="receipt-content">
-        <ReceiptCard items={mockOutfitItems} />
+        <ReceiptCard items={outfitItems} />
         <ReceiptSaveSection />
       </section>
 
