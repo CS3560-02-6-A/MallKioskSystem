@@ -1,19 +1,25 @@
 import { theme } from "../../../styles/theme";
 
-export default function OutfitCategoryCard({ item }) {
+export default function OutfitCategoryCard({ item, category, onSelectItem, isSelected }) {
     if (!item) return null;
     return (
         <div
-            style = {{
+            onClick={() => onSelectItem(category, item)}
+            style={{
                 backgroundColor: theme.colors.offWhite,
-                border: '1.5px solid ${theme.colors.lightBrown}',
+                border: `1.5px solid ${theme.colors.lightBrown}`,
+                borderColor: isSelected ? theme.colors.text : theme.colors.lightBrown,
+                borderWidth: isSelected ? "2px" : "1.5px",
                 borderRadius: "12px",
                 padding: "16px 20px",
                 display: "flex",
                 flexDirection: "column",
                 gap: "6px",
-                width: "50%",
+                width: "calc(33.333% - 14px)",
+                minWidth: "200px",
                 boxShadow: theme.shadows.dropShadow,
+                cursor: "pointer",
+                transition: "all 0.2s ease",
             }}
             >
                 <img 
