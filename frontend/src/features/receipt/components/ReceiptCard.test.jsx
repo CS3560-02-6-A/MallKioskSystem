@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
 import ReceiptCard from './ReceiptCard'
 import { mockOutfitItems } from '../mockData'
@@ -25,7 +25,8 @@ describe('ReceiptCard', () => {
   it('displays the correct total for a single item', () => {
     const single = [mockOutfitItems[0]]
     render(<ReceiptCard items={single} />)
-    expect(screen.getByText(`$${single[0].price.toFixed(2)}`)).toBeInTheDocument()
+    const totalDiv = screen.getByText('Estimated Total:').closest('div')
+    expect(within(totalDiv).getByText(`$${single[0].price.toFixed(2)}`)).toBeInTheDocument()
   })
 
   it('shows $0.00 total for an empty list', () => {
