@@ -88,15 +88,15 @@ export default function Input_GenderPage() {
                 }}
             >
                 <ChoiceCard
-                    imageSrc={selectedShopper === "man" ? manImageSelected : manImage}
+                    imageSrc={selectedShopper === "men" ? manImageSelected : manImage}
                     alt="man image"
-                    selected={selectedShopper === "man"}
+                    selected={selectedShopper === "men"}
                     onClick={() => setSelectedShopper("men")}
                 />
                 <ChoiceCard
-                    imageSrc={selectedShopper === "woman" ? womanImageSelected : womanImage}
+                    imageSrc={selectedShopper === "women" ? womanImageSelected : womanImage}
                     alt="woman image"
-                    selected={selectedShopper === "woman"}
+                    selected={selectedShopper === "women"}
                     onClick={() => setSelectedShopper("women")}
                 />
                 <ChoiceCard
