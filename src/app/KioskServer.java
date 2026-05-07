@@ -90,21 +90,21 @@ public class KioskServer
             }
 
             List<StoreItem> outfit = service.generateOutfit(gender, occasion);
-             for (StoreItem i : outfit) 
-        {
-            System.out.println(
-               "Name: " + i.getItemName() +
-            " | Type: " + i.getItemType() +
-            " | Color: " + i.getItemColor() +
-            " | Gender: " + i.getGender() +
-            " | Occasion: " + i.getOccasion() +
-            " | StoreID: " + i.getStoreId() +
-            " | ItemID: " + i.getItemId() +
-            " | Price: $" + i.getPrice() +
-            " | InStock: " + i.isInStock() +
-            " | Aisle: " + i.getAisle()
-            );
-        }
+        //      for (StoreItem i : outfit) 
+        // {
+        //     System.out.println(
+        //        "Name: " + i.getItemName() +
+        //     " | Type: " + i.getItemType() +
+        //     " | Color: " + i.getItemColor() +
+        //     " | Gender: " + i.getGender() +
+        //     " | Occasion: " + i.getOccasion() +
+        //     " | StoreID: " + i.getStoreId() +
+        //     " | ItemID: " + i.getItemId() +
+        //     " | Price: $" + i.getPrice() +
+        //     " | InStock: " + i.isInStock() +
+        //     " | Aisle: " + i.getAisle()
+        //     );
+        // }
             String json = outfitToJson(outfit);
 
             exchange.getResponseHeaders().set("Content-Type", "application/json");

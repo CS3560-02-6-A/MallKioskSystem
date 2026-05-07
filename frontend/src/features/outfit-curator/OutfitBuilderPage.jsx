@@ -323,9 +323,18 @@ export default function OutfitBuilderPage() {
               />
             ))}
 
-            <AppButton onClick={() => navigate("/receipt", { state: { outfit } })}>
-                Finish Outfit
-            </AppButton>
+            {filledCount === CATEGORIES.length && (
+  <AppButton
+    onClick={() => {
+      console.log("sending outfit:", selectedItems);
+      navigate("/receipt", {
+        state: { outfit: selectedItems },
+      });
+    }}
+  >
+    Finish Outfit
+  </AppButton>
+)}
           </div>
         </div>
       </div>

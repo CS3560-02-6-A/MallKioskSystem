@@ -27,7 +27,6 @@ public class outfitGenerator {
             if (item.getItemType().equalsIgnoreCase("Shirt")) {
                 topsList.add(item);
             }
-            return topsList;
         }
         return topsList;
     }

@@ -6,6 +6,8 @@
 
 .receipt-page {
   min-height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto;
   background: #f6f4ef;
   display: flex;
   flex-direction: column;
@@ -51,10 +53,10 @@
 .receipt-content {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* change from center */
   gap: 4rem;
+  flex-wrap: wrap;
 }
-
 
 
 
@@ -204,9 +206,9 @@
 .receipt-bottom {
   display: flex;
   justify-content: center;
-  padding-top: 3rem;
+  padding: 3rem 0; /* give bottom room */
+  flex-shrink: 0;
 }
-
 
 
 /* PRINT CLEANUP */

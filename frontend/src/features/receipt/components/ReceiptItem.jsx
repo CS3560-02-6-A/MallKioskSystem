@@ -2,23 +2,21 @@
 
 // Receipt component: The individual item itself layout
 // Displays Item image, name, location, price
-
 export default function ReceiptItem({ item }) {
   return (
     <div className="receipt-item">
 
-      {/* Item IMAGE */}
-      <img src={item.image} alt={item.name} />
+      <img src={item.imagePath || ""} alt={item.name} />
 
-      {/* Item NAME + LOCATION */}
       <div className="receipt-item-info">
         <h3>{item.name}</h3>
-        <button type="button">{item.location}</button>
+        <button type="button">
+          Store {item.storeId} - Aisle {item.aisle}
+        </button>
       </div>
 
-      {/* Item PRICE */}
       <p className="receipt-price">
-        ${item.price.toFixed(2)}
+        ${Number(item.price || 0).toFixed(2)}
       </p>
     </div>
   );
