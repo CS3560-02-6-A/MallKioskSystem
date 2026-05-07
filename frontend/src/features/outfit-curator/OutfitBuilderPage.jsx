@@ -110,7 +110,7 @@ export default function OutfitBuilderPage() {
         fontFamily: theme.fonts.sans,
       }}
     >
-      <HeaderBar leftButton="← Change Filters">
+      <HeaderBar leftButton="← Change Filters" destination="/gender">
         <h1
           style={{
             justifyContent: "center",

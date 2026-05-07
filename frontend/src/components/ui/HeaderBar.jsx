@@ -3,14 +3,15 @@ import GoBackButton from "./GoBackButton";
 import EndSessionButton from "./EndSessionButton";
 
 
-export default function HeaderBar({ 
-  children, 
+export default function HeaderBar({
+  children,
   leftButton = "← Go Back",
-  style = {}, 
-  ...props 
+  destination,
+  style = {},
+  ...props
 }) {
   return (
-    <header style={{ 
+    <header style={{
         width: "100%",
         height: "clamp(88px, 14vh, 120px)",
         display: "flex",
@@ -20,7 +21,7 @@ export default function HeaderBar({
         background: "transparent",
         gap: "clamp(10px, 4vw, 65px)",
       }}>
-      <GoBackButton> {leftButton} </GoBackButton>
+      <GoBackButton destination={destination}> {leftButton} </GoBackButton>
       <div style={{ flex: 1 }}>{children}</div>
       <EndSessionButton/>
     </header>
