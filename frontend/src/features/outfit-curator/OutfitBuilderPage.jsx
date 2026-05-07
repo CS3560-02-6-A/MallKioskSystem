@@ -255,6 +255,62 @@ export default function OutfitBuilderPage() {
             </h2>
           </div>
 
+        {/* No category selected → show Generate button centered in section */}
+        {!selectedCategory && (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              flex: 1,
+              gap: "18px",
+              minHeight: "180px",
+            }}
+          >
+            <p
+              style={{
+                fontFamily: theme.fonts.sans,
+                fontSize: theme.fontSizes.onboardingTagline,
+                color: theme.colors.mutedText,
+                margin: 0,
+                textAlign: "center",
+                maxWidth: 400,
+              }}
+            >
+              Choose a category on the left, or generate an outfit.
+            </p>
+            <AppButton onClick={fetchOutfit} style={{ minWidth: 220, fontSize: 22 }}>
+              Generate Random Outfit
+            </AppButton>
+            {/* Show Finish button and prompt only if all categories are filled */}
+            {filledCount === CATEGORIES.length && (
+              <div style={{ marginTop: 32, display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
+                <span
+                  style={{
+                    fontFamily: theme.fonts.sans,
+                    fontSize: theme.fontSizes.onboardingTagline,
+                    color: theme.colors.text,
+                    marginBottom: 4,
+                  }}
+                >
+                  Satisfy with your look?
+                </span>
+                <AppButton
+                  onClick={() => {
+                    navigate("/receipt", {
+                      state: { outfit: selectedItems },
+                    });
+                  }}
+                  style={{ minWidth: 200, fontSize: 20 }}
+                >
+                  Finish Outfit
+                </AppButton>
+              </div>
+            )}
+          </div>
+        )}
+
           <div
             style={{
               display: "flex",
@@ -268,23 +324,6 @@ export default function OutfitBuilderPage() {
               padding: "16px",
             }}
           >
-            {/* No category selected → show Generate button */}
-            {!selectedCategory && (
-              <>
-                <p
-                  style={{
-                    fontFamily: theme.fonts.sans,
-                    fontSize: theme.fontSizes.onboardingTagline,
-                    color: theme.colors.mutedText,
-                    margin: 0,
-                  }}
-                >
-                  Choose a category on the left, or generate an outfit.
-                </p>
-                <AppButton onClick={fetchOutfit}>Generate Random Outfit</AppButton>
-              </>
-            )}
-
             {/* Category selected but no matches */}
             {selectedCategory && visibleItems.length === 0 && (
               <p
@@ -323,18 +362,6 @@ export default function OutfitBuilderPage() {
               />
             ))}
 
-            {filledCount === CATEGORIES.length && (
-  <AppButton
-    onClick={() => {
-      console.log("sending outfit:", selectedItems);
-      navigate("/receipt", {
-        state: { outfit: selectedItems },
-      });
-    }}
-  >
-    Finish Outfit
-  </AppButton>
-)}
           </div>
         </div>
       </div>
