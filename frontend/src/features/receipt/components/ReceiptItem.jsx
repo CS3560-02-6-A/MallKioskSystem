@@ -6,13 +6,15 @@ export default function ReceiptItem({ item }) {
   return (
     <div className="receipt-item">
 
-      <img src={item.imagePath || ""} alt={item.name} />
+      {item.imagePath && (
+        <img src={item.imagePath} alt={item.name} />
+      )}
 
       <div className="receipt-item-info">
         <h3>{item.name}</h3>
-        <button type="button">
+        <span>
           Store {item.storeId} - Aisle {item.aisle}
-        </button>
+        </span>
       </div>
 
       <p className="receipt-price">

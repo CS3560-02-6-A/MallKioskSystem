@@ -92,8 +92,8 @@
 }
 
 .receipt-item {
-  display: grid;
-  grid-template-columns: 80px 1fr auto;
+  display: flex;
+ justify-content: space-between;
   align-items: center;
   gap: 1rem;
 }
@@ -105,14 +105,22 @@
   background: white;
 }
 
+.receipt-item-info {
+  flex: 1;
+  min-width: 0; /* allow text to shrink and prevent overflow */
+}
+
 .receipt-item-info h3 {
   font-family: "Raleway", sans-serif;
   font-size: 24px;
   font-weight: 600;
   margin: 0 0 0.3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.receipt-item-info button {
+.receipt-item-info span {
   font-family: "Raleway", sans-serif;
   font-size: 20px;
   font-weight: 400;
@@ -126,6 +134,7 @@
   font-family: "Raleway", sans-serif;
   font-size: 24px;
   font-weight: 600;
+  flex-shrink: 0;
 }
 
 
