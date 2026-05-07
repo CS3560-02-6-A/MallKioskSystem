@@ -19,7 +19,7 @@ export default function ReceiptPage() {
   return (
     <main className="receipt-page">
       <div className="receipt-top no-print">
-        <GoBackButton destination="/builder">
+        <GoBackButton destination="/builder" state={{ outfit: location.state?.outfit }}>
           ← Edit Outfit
         </GoBackButton>
       </div>

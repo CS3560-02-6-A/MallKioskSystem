@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { theme } from "../../styles/theme";
 
-export default function GoBackButton({ destination, children, style = {}, ...props }) {
+export default function GoBackButton({ destination, state, children, style = {}, ...props }) {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
     if (destination) {
-      navigate(destination);
+      navigate(destination, { state });
     } else {
       navigate(-1);
     }
