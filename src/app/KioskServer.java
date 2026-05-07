@@ -178,6 +178,7 @@ public class KioskServer
               .append("\"name\":\"").append(it.getItemName()).append("\",")
               .append("\"type\":\"").append(it.getItemType()).append("\",")
               .append("\"color\":\"").append(it.getItemColor()).append("\",")
+              .append("\"gender\":\"").append(it.getGender() != null ? it.getGender() : "").append("\",")
               .append("\"price\":").append(it.getPrice()).append(",")
               .append("\"storeId\":").append(it.getStoreId()).append(",")
               .append("\"aisle\":\"").append(it.getAisle()).append("\"")
