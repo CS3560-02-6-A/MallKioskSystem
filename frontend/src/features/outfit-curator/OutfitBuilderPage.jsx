@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import { theme } from "../../styles/theme";
 import HeaderBar from "../../components/ui/HeaderBar";
 import AppButton from "../../components/ui/AppButton";
@@ -35,6 +35,7 @@ function buildSelectedItemsByCategory(items) {
 export default function OutfitBuilderPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const location = useLocation();
 
   const occasion = searchParams.get("occasion");
   const gender = searchParams.get("gender");
@@ -43,7 +44,8 @@ export default function OutfitBuilderPage() {
   const [allItems, setAllItems] = useState([]);
 
   // Stores the user's current pick for each category button.
-  const [selectedItems, setSelectedItems] = useState({});
+  // Restored from receipt page state when editing an existing outfit.
+  const [selectedItems, setSelectedItems] = useState(location.state?.outfit ?? {});
 
   // items matching the currently selected category button
   const visibleItems = selectedCategory
@@ -108,7 +110,7 @@ export default function OutfitBuilderPage() {
         fontFamily: theme.fonts.sans,
       }}
     >
-      <HeaderBar leftButton="← Change Filters">
+      <HeaderBar leftButton="← Change Filters" destination="/gender">
         <h1
           style={{
             justifyContent: "center",
