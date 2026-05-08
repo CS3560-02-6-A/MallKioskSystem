@@ -353,6 +353,7 @@ export default function OutfitBuilderPage() {
                   gender: item.gender,
                   price: item.price,
                   storeId: item.storeId,
+                  storeName: item.storeName,
                   aisle: item.aisle,
                 }}
                 category={selectedCategory}

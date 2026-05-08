@@ -47,11 +47,12 @@ public class storeItemDAO {
     List<StoreItem> items = new ArrayList<>();
 
     String sql = "SELECT si.storeID, si.itemID, si.inStock, si.price, si.aisle, " +
-                 "i.name, i.type, i.color, i.gender, i.occasion " +
+                 "i.name, i.type, i.color, i.gender, i.occasion, " +
+                 "s.name AS storeName " +
                  "FROM inventory_tbl si " +
-                 "JOIN items_tbl i ON si.itemID = i.ID " + 
-                 "WHERE si.inStock = true"
-                 ;
+                 "JOIN items_tbl i ON si.itemID = i.ID " +
+                 "JOIN stores_tbl s ON si.storeID = s.ID " +
+                 "WHERE si.inStock = true";
 
     try (Connection conn = databaseConnection.getConnection();
          PreparedStatement ps = conn.prepareStatement(sql);
@@ -70,6 +71,7 @@ public class storeItemDAO {
                 rs.getString("gender"),
                 rs.getString("occasion")
             );
+            item.setStoreName(rs.getString("storeName"));
             items.add(item);
         }
 
@@ -85,9 +87,11 @@ public class storeItemDAO {
 
     
     String sql = "SELECT si.storeID, si.itemID, si.inStock, si.price, si.aisle, " +
-                 "i.name, i.type, i.color, i.gender, i.occasion " +
+                 "i.name, i.type, i.color, i.gender, i.occasion, " +
+                 "s.name AS storeName " +
                  "FROM inventory_tbl si " +
-                 "JOIN items_tbl i ON si.itemID = i.ID " +  
+                 "JOIN items_tbl i ON si.itemID = i.ID " +
+                 "JOIN stores_tbl s ON si.storeID = s.ID " +
                  "WHERE si.inStock = true " +
                  "AND (i.gender = ? OR i.gender = 'unisex' OR ? IS NULL) " +
                  "AND (i.occasion = ? OR ? IS NULL)";
@@ -117,6 +121,7 @@ public class storeItemDAO {
                     rs.getString("gender"),
                     rs.getString("occasion")
                 );
+                item.setStoreName(rs.getString("storeName"));
                 items.add(item);
             }
         }
