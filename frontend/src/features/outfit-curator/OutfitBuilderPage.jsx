@@ -355,6 +355,7 @@ export default function OutfitBuilderPage() {
                   storeId: item.storeId,
                   storeName: item.storeName,
                   aisle: item.aisle,
+                  storeHours: item.storeHours,
                 }}
                 category={selectedCategory}
                 onSelectItem={onSelectItem}

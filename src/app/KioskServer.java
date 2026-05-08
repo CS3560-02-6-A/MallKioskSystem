@@ -6,7 +6,11 @@ import com.sun.net.httpserver.HttpServer;
 import com.sun.net.httpserver.HttpExchange;
 import java.io.*;
 import java.net.InetSocketAddress;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.Locale;
+import src.dao.storeDAO;
 import src.model.StoreItem;
 import src.model.Receipt;
 import src.service.mallKioskService;
@@ -18,6 +22,10 @@ public class KioskServer
     public static void main(String[] args) throws Exception
     {
         mallKioskService service = new mallKioskService();
+        storeDAO myStoreDAO = new storeDAO();
+        String today = LocalDate.now()
+            .getDayOfWeek()
+            .getDisplayName(TextStyle.FULL, Locale.ENGLISH);
 
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
@@ -51,7 +59,7 @@ public class KioskServer
             }
 
             List<StoreItem> items = service.getItemsFullDataWithFilters(gender, occasion);
-            String json = outfitToJson(items);
+            String json = outfitToJson(items, myStoreDAO, today);
 
             exchange.getResponseHeaders().set("Content-Type", "application/json");
             byte[] bytes = json.getBytes();
@@ -90,22 +98,7 @@ public class KioskServer
             }
 
             List<StoreItem> outfit = service.generateOutfit(gender, occasion);
-        //      for (StoreItem i : outfit) 
-        // {
-        //     System.out.println(
-        //        "Name: " + i.getItemName() +
-        //     " | Type: " + i.getItemType() +
-        //     " | Color: " + i.getItemColor() +
-        //     " | Gender: " + i.getGender() +
-        //     " | Occasion: " + i.getOccasion() +
-        //     " | StoreID: " + i.getStoreId() +
-        //     " | ItemID: " + i.getItemId() +
-        //     " | Price: $" + i.getPrice() +
-        //     " | InStock: " + i.isInStock() +
-        //     " | Aisle: " + i.getAisle()
-        //     );
-        // }
-            String json = outfitToJson(outfit);
+            String json = outfitToJson(outfit, myStoreDAO, today);
 
             exchange.getResponseHeaders().set("Content-Type", "application/json");
             byte[] bytes = json.getBytes();
@@ -147,7 +140,7 @@ public class KioskServer
 
             String json = "{\"total\":" + receipt.getTotalPrice() +
                           ",\"generatedAt\":\"" + receipt.getGeneratedAt() + "\"" +
-                          ",\"items\":" + outfitToJson(outfit) + "}";
+                          ",\"items\":" + outfitToJson(outfit, myStoreDAO, today) + "}";
 
             exchange.getResponseHeaders().set("Content-Type", "application/json");
             byte[] bytes = json.getBytes();
@@ -167,12 +160,19 @@ public class KioskServer
         exchange.getResponseHeaders().set("Access-Control-Allow-Headers", "Content-Type");
     }
 
-    private static String outfitToJson(List<StoreItem> items)
+    private static String outfitToJson(List<StoreItem> items, storeDAO dao, String today)
     {
         StringBuilder sb = new StringBuilder("[");
         for (int i = 0; i < items.size(); i++) {
             StoreItem it = items.get(i);
             if (i > 0) sb.append(",");
+
+            String storeHours = "";
+            String[] times = dao.getHoursForStoreAndDay(it.getStoreId(), today);
+            if (times != null) {
+                storeHours = formatTime(times[0]) + " - " + formatTime(times[1]);
+            }
+
             sb.append("{")
               .append("\"itemId\":").append(it.getItemId()).append(",")
               .append("\"name\":\"").append(it.getItemName()).append("\",")
@@ -182,10 +182,23 @@ public class KioskServer
               .append("\"price\":").append(it.getPrice()).append(",")
               .append("\"storeId\":").append(it.getStoreId()).append(",")
               .append("\"storeName\":\"").append(it.getStoreName() != null ? it.getStoreName() : "").append("\",")
-              .append("\"aisle\":\"").append(it.getAisle()).append("\"")
+              .append("\"aisle\":\"").append(it.getAisle()).append("\",")
+              .append("\"storeHours\":\"").append(storeHours).append("\"")
               .append("}");
         }
         sb.append("]");
         return sb.toString();
+    }
+
+    private static String formatTime(String sqlTime)
+    {
+        if (sqlTime == null || sqlTime.isEmpty()) return "";
+        String[] parts = sqlTime.split(":");
+        int hour   = Integer.parseInt(parts[0]);
+        int minute = Integer.parseInt(parts[1]);
+        String period = hour < 12 ? "AM" : "PM";
+        int displayHour = hour % 12;
+        if (displayHour == 0) displayHour = 12;
+        return displayHour + ":" + String.format("%02d", minute) + period;
     }
 }

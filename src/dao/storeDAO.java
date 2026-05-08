@@ -86,4 +86,33 @@ public class storeDAO
         }
         return myStore;
     }
+
+    public String[] getHoursForStoreAndDay(int storeID, String dayOfWeek)
+    {
+        String sql = "SELECT openTime, closeTime FROM storeHours_tbl " +
+                     "WHERE storeID = ? AND dayOfWeek = ?";
+
+        try (Connection myConnection = databaseConnection.getConnection();
+             PreparedStatement myStatement = myConnection.prepareStatement(sql))
+        {
+            myStatement.setInt(1, storeID);
+            myStatement.setString(2, dayOfWeek);
+
+            try (ResultSet myResultSet = myStatement.executeQuery())
+            {
+                if (myResultSet.next())
+                {
+                    return new String[]{
+                        myResultSet.getString("openTime"),
+                        myResultSet.getString("closeTime")
+                    };
+                }
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException("Error retrieving store hours from database", e);
+        }
+        return null;
+    }
 }
