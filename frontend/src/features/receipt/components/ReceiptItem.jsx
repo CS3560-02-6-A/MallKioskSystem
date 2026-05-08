@@ -13,7 +13,7 @@ export default function ReceiptItem({ item }) {
       <div className="receipt-item-info">
         <h3>{item.name}</h3>
         <span>
-          Store {item.storeId} - Aisle {item.aisle}
+          {item.storeName} - Aisle {item.aisle}
         </span>
       </div>
 

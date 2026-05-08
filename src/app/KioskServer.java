@@ -181,6 +181,7 @@ public class KioskServer
               .append("\"gender\":\"").append(it.getGender() != null ? it.getGender() : "").append("\",")
               .append("\"price\":").append(it.getPrice()).append(",")
               .append("\"storeId\":").append(it.getStoreId()).append(",")
+              .append("\"storeName\":\"").append(it.getStoreName() != null ? it.getStoreName() : "").append("\",")
               .append("\"aisle\":\"").append(it.getAisle()).append("\"")
               .append("}");
         }

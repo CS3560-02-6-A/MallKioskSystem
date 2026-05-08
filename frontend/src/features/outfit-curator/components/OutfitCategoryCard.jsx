@@ -65,7 +65,7 @@ export default function OutfitCategoryCard({ item, category, onSelectItem, isSel
                     fontSize: theme.fontSizes.onboardingLink,
                     color: theme.colors.text,
                 }}>
-                    Store #{item.storeId} , Aisle {item.aisle}
+                    {item.storeName} - Aisle {item.aisle}
                 </p>
                 <p style={{
                     margin: 0,

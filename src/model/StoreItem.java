@@ -13,6 +13,7 @@ public class StoreItem
     private String color;
     private String gender;
     private String occasion;
+    private String storeName;
 
     public StoreItem(int storeId, int itemId, boolean inStock, double price, String aisle) 
     {
@@ -51,7 +52,10 @@ public class StoreItem
     public String getGender() { return gender; }
     public String getOccasion() { return occasion; }
 
+    public String getStoreName() { return storeName; }
+
     // Setters
+    public void setStoreName(String storeName) { this.storeName = storeName; }
     public void setStoreId(int storeId) { this.storeId = storeId; }
     public void setItemId(int itemId) { this.itemId = itemId; }
     public void setInStock(boolean inStock) { this.inStock = inStock; }
