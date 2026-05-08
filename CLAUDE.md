@@ -75,3 +75,11 @@ All run from `/frontend/`:
 **No backend framework** — `KioskServer.java` manually routes requests, parses query params, and writes JSON responses. When adding endpoints, follow the existing handler pattern in that file.
 
 **Frontend fetches backend** at `http://localhost:8080`. The Vite dev server does not proxy — both must be running simultaneously.
+
+**Receipt page data flow (non-obvious):** `ReceiptPage` does NOT call `/api/receipt`. It reads `location.state.outfit` set by `OutfitBuilderPage` when navigating to `/receipt`. The builder fetches the full catalog from `/api/items`, the user picks items, and those item objects (with all API fields) are passed as router state. To add a new field to receipt items, add it to `outfitToJson()` in `KioskServer.java` AND include it in the `item={{...}}` prop passed to `OutfitCategoryCard` in `OutfitBuilderPage.jsx`.
+
+**`outfitToJson()` in KioskServer** is the single serializer shared by all three endpoints. It is the right place to add new per-item fields.
+
+**`OperationHour` model** has no per-day getter — only `printOperationHour()` which dumps the whole HashMap as toString. Use `storeDAO.getHoursForStoreAndDay(storeId, dayName)` for targeted single-day lookups instead.
+
+**`storeHours_tbl` day format:** days are stored as capitalized English names ("Monday", "Tuesday", …). Java's `LocalDate.now().getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH)` produces the same format.

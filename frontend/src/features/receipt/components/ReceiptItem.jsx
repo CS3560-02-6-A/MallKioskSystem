@@ -12,9 +12,16 @@ export default function ReceiptItem({ item }) {
 
       <div className="receipt-item-info">
         <h3>{item.name}</h3>
-        <span>
-          {item.storeName} - Aisle {item.aisle}
-        </span>
+        <div className="receipt-item-pills">
+          <span className="receipt-location-pill">
+            {item.storeName} - Aisle {item.aisle}
+          </span>
+          {item.storeHours && (
+            <span className="receipt-hours-pill">
+              {item.storeHours}
+            </span>
+          )}
+        </div>
       </div>
 
       <p className="receipt-price">

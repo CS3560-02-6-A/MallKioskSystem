@@ -120,7 +120,15 @@
   text-overflow: ellipsis;
 }
 
-.receipt-item-info span {
+.receipt-item-pills {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.receipt-location-pill {
   font-family: "Raleway", sans-serif;
   font-size: 20px;
   font-weight: 400;
@@ -128,6 +136,18 @@
   border: none;
   border-radius: 999px;
   padding: 4px 18px;
+  white-space: nowrap;
+}
+
+.receipt-hours-pill {
+  font-family: "Raleway", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  background: #C8C0D9;
+  border: none;
+  border-radius: 999px;
+  padding: 4px 18px;
+  white-space: nowrap;
 }
 
 .receipt-price {
